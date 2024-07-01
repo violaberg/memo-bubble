@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import NavBar from './components/NavBar';
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
+import CapsulePage from './pages/CapsulePage';
 import { EmailSent } from './pages/auth/EmailSent';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/email-sent" render={() => <EmailSent />} />
+          <Route exact path="/capsules" render={() => <CapsulePage />} />
         </Switch>
       </Container>
 

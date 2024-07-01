@@ -1,0 +1,27 @@
+.capsuleContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.capsule {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    width: 80%;
+}
+
+.capsule h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.capsule p {
+    font-size: 1rem;
+    color: #fafafa;
+}
+
+.capsulePage {
+    padding: 2rem;
+}
