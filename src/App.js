@@ -1,6 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import './App.module.css';
 import { axiosReq } from './api/axiosDefaults';
+import Container from 'react-bootstrap/Container';
+import SignInForm from './pages/auth/SignInForm';
 
 function App() {
   const getCapsule = async () => {
@@ -11,22 +14,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={getCapsule} className="btn-lg" style={{ height: "20px", width: "50px" }}>GET</button>
-      </header>
-     
+      <Container>
+        <Switch>
+          <Route exact path="/" render={() => <h1>Home</h1>} />
+          <Route exact path="/signin" render={() => <SignInForm />} />
+        </Switch>
+      </Container>
+
     </div>
   );
 }
