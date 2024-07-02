@@ -1,25 +1,14 @@
 .Row {
     height: calc(100vh - 81px);
+    margin: 2rem;
   }
   .Input {
-    background: #ffffff;
-    border: 1px solid #c7c8cf;
+    background: #f5f5f5;
+    border: 2px ridge #ff8f00;
     box-sizing: border-box;
-    border-radius: 2px;
-    color: #7177a1;
+    color: #010008;
     text-align: center;
     padding: 10px;
-  }
-  
-  .Header {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #2142b2;
   }
   
   .Link {

@@ -14,7 +14,6 @@ const GeminiMessages = ({ imageId, imagesArray }) => {
     <Container>
       <Row>
         <Col>
-          <div>GeminiMessages</div>
           {geminiMessages.length > 0 ? (
             geminiMessages.map((msg, index) => (
               <p key={index}>
