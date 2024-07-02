@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/Capsule.module.css';
 import { Link, useHistory } from 'react-router-dom';
+import GeminiMessages from './GeminiMessages';
 
 const Capsule = ({ ...props }) => {
   const history = useHistory();
@@ -13,7 +14,7 @@ const Capsule = ({ ...props }) => {
 
   const videosArray = videos?.map((video) => video);
 
-  console.log('imagesArray', imagesArray);
+  // console.log('imagesArray', imagesArray);
 
   // console.log('videosArray', videosArray);
 
@@ -36,11 +37,13 @@ const Capsule = ({ ...props }) => {
               alt='capsule'
               style={{ width: '100%', height: 'auto' }}
             />
+            <h3>Date taken : {image.date_taken}</h3>
             <h3>Gemini message</h3>
-            <p>
-              
-              {image.gemini_messages[0].message}
-            </p>
+
+            <GeminiMessages
+              imageId={image.id}
+              imagesArray={imagesArray}
+            />
           </div>
         ))}
       </div>
