@@ -37,7 +37,7 @@ const Capsule = ({ ...props }) => {
               alt='capsule'
               style={{ width: '100%', height: 'auto' }}
             />
-            <h3>Date taken : {image.date_taken}</h3>
+            <strong>Date taken : {image.date_taken}</strong>
             <h3>Gemini message</h3>
 
             <GeminiMessages
