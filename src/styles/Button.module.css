@@ -1,8 +1,8 @@
 .Button {
     font-size: 0.8rem;
     align-self: center;
-    border-color: transparent;
-    color: #ff8f00;
+    border-color: #FFA000;
+    color: #030011;
     padding: 4px 10px;
     margin-left: 2px;
     margin-right: 2px;
@@ -64,7 +64,7 @@
   }
   
   .Bright {
-    background-color: #ff8f00;
+    background-color: #FFA000;
     color: #010008;
     width: 50%;
   }

@@ -4,9 +4,9 @@
   }
   .Input {
     background: #f5f5f5;
-    border: 2px ridge #ff8f00;
+    border: transparent;
     box-sizing: border-box;
-    color: #010008;
+    color: #030003;
     text-align: center;
     padding: 10px;
   }
