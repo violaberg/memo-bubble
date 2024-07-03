@@ -101,6 +101,13 @@ const NavBar = () => {
             >
               <i className="fas fa-user-plus"></i>Capsules
             </NavLink>
+            <NavLink
+              to="/capsules/create"
+              className={styles.NavLink}
+              activeClassName={styles.Active}
+            >
+              <i className="fas fa-user-plus"></i>Add Capsule
+            </NavLink>
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
