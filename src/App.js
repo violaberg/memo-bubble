@@ -7,7 +7,7 @@ import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
 import CapsulesPage from './pages/capsules/CapsulesPage';
 import { EmailSent } from './pages/auth/EmailSent';
-import EmailConfirmation from './pages/auth/EmailConfirmation';
+import EmailConfirmed from './pages/auth/EmailConfirmed';
 import { CapsulePage } from './pages/capsules/CapsulePage';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/email-sent" render={() => <EmailSent />} />
-          <Route exact path="/email-confirmation" render={() => <EmailConfirmation />} />
+          <Route exact path="/email-confirmed" render={() => <EmailConfirmed />} />
           <Route exact path="/capsules" render={() => <CapsulesPage />} />
           <Route exact path="/capsules/:id" render={() => <CapsulePage />} />
         </Switch>
