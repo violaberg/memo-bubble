@@ -2,6 +2,8 @@ import React from 'react';
 import styles from '../styles/Capsule.module.css';
 import { Link, useHistory } from 'react-router-dom';
 import GeminiMessages from './GeminiMessages';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 const Capsule = ({ ...props }) => {
   const history = useHistory();
@@ -19,8 +21,8 @@ const Capsule = ({ ...props }) => {
   // console.log('videosArray', videosArray);
 
   return (
-    <div className={styles.capsuleContainer}>
-      <div className={styles.capsule}>
+    <Container>
+      <Row className={styles.capsule}>
         <h2>{title}</h2>
         <p>{message}</p>
         <p>
@@ -40,14 +42,11 @@ const Capsule = ({ ...props }) => {
             <strong>Date taken : {image.date_taken}</strong>
             <h3>Gemini message</h3>
 
-            <GeminiMessages
-              imageId={image.id}
-              imagesArray={imagesArray}
-            />
+            <GeminiMessages imageId={image.id} imagesArray={imagesArray} />
           </div>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 

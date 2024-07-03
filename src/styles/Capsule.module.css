@@ -1,14 +1,9 @@
-.capsuleContainer {
-    display: flex;
-    flex-direction: column;
-}
+
 
 .capsule {
     background-color: transparent;
     border: 2px ridge #ff8f00;
     padding: 20px;
-    margin: 10px;
-    width: 80%;
 }
 
 .capsule p {
