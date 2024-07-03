@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRedirect } from '../../hooks/useRedirect';
 import { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { axiosReq } from '../../api/axiosDefaults';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Image from 'react-bootstrap/Image';
@@ -29,6 +31,7 @@ function CapsuleCreateForm() {
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
   const videoInput = useRef(null);
+  const history = useHistory();
 
   const handleChange = (e) => {
     setCapsuleData({
@@ -54,6 +57,29 @@ function CapsuleCreateForm() {
         ...capsuleData,
         videos: URL.createObjectURL(e.target.files[0]),
       });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('message', message);
+      formData.append('date_taken', date_taken);
+      // formData.append('location', location);
+      Array.from(imageInput.current.files).forEach((file) => {
+        formData.append('upoladed_images', file);
+      });
+      Array.from(videoInput.current.files).forEach((file) => {
+        formData.append('videos', file);
+      });
+
+      const res = await axiosReq.post('/capsules/', formData);
+      console.log('formData');
+      history.push(`/capsules/${res.data.id}`);
+    } catch (err) {
+      setErrors(err.response?.data);
     }
   };
 
@@ -108,7 +134,7 @@ function CapsuleCreateForm() {
             </Alert>
           ))}
         </Row>
-        <Row className="my-5">
+        <Row className='my-5'>
           <Form.Group className='text-center justify-content-between'>
             {capsuleData.images ? (
               <>
@@ -211,6 +237,14 @@ function CapsuleCreateForm() {
               {message}
             </Alert>
           ))}
+        </Row>
+        <Row>
+          <button
+            className={`${btnStyles.Button} ${btnStyles.Blue} mx-auto btn my-5`}
+            onClick={handleSubmit}
+          >
+            Create Capsule
+          </button>
         </Row>
       </Container>
     </Form>
