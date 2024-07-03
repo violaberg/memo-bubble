@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-// import logo from "../assets/logo.png";
+import logo from "../assets/logo.jpg";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import {
@@ -75,7 +75,7 @@ const NavBar = () => {
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            {/* <img src={logo} alt="logo" height="45" /> */}
+            <img src={logo} alt="logo" height="45" />
           </Navbar.Brand>
         </NavLink>
 
