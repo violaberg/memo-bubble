@@ -9,6 +9,7 @@ import CapsulesPage from './pages/capsules/CapsulesPage';
 import { EmailSent } from './pages/auth/EmailSent';
 import EmailConfirmed from './pages/auth/EmailConfirmed';
 import { CapsulePage } from './pages/capsules/CapsulePage';
+import CapsuleCreateForm from './pages/capsules/CapsuleCreateForm';
 
 function App() {
 
@@ -22,8 +23,10 @@ function App() {
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/email-sent" render={() => <EmailSent />} />
           <Route exact path="/email-confirmed" render={() => <EmailConfirmed />} />
+          <Route exact path="/capsules/create" render={() => <CapsuleCreateForm />} />
           <Route exact path="/capsules" render={() => <CapsulesPage />} />
           <Route exact path="/capsules/:id" render={() => <CapsulePage />} />
+
         </Switch>
       </Container>
 
