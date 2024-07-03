@@ -24,7 +24,7 @@ const Capsule = ({ ...props }) => {
   return (
     <Container>
       <Row className={styles.capsule}>
-        <h2>{title}</h2>
+        <h1>{title}</h1>
         <p>{message}</p>
         <p>
           <strong>Created On: {created_on}</strong>
