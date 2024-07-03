@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import GeminiMessages from './GeminiMessages';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Capsule = ({ ...props }) => {
   const history = useHistory();
@@ -31,20 +32,40 @@ const Capsule = ({ ...props }) => {
         <p>
           <strong>Updated On: {updated_on}</strong>
         </p>
-        {imagesArray?.map((image, id) => (
-          <div>
-            <img
-              key={id}
-              src={image.url}
-              alt='capsule'
-              style={{ width: '100%', height: 'auto' }}
-            />
-            <strong>Date taken : {image.date_taken}</strong>
-            <h3>Gemini message</h3>
+        <Col>
+          <h2>Images</h2>
+          {imagesArray?.map((image, id) => (
+            <div>
+              <img
+                key={id}
+                src={image.url}
+                alt='capsule'
+                style={{ width: '100%', height: 'auto' }}
+              />
+              <strong>Date taken : {image.date_taken}</strong>
+              <h3>Gemini message</h3>
 
-            <GeminiMessages imageId={image.id} imagesArray={imagesArray} />
-          </div>
-        ))}
+              <GeminiMessages itemId={image.id} array={imagesArray} />
+            </div>
+          ))}
+        </Col>
+        <Col>
+          <h2>Videos</h2>
+          {videosArray?.map((video, id) => (
+            <div>
+              <video
+                key={id}
+                src={video.url}
+                controls
+                style={{ width: '100%', height: 'auto' }}
+              />
+              <strong>Date taken : {video.date_taken}</strong>
+              <h3>Gemini message</h3>
+
+              <GeminiMessages itemId={video.id} array={videosArray} />
+            </div>
+          ))}
+        </Col>
       </Row>
     </Container>
   );
