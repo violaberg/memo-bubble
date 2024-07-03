@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EmailConfirmation = () => {
+const EmailConfirmed = () => {
     return (
         <div>
             <h1>Email Confirmed</h1>
@@ -9,4 +9,4 @@ const EmailConfirmation = () => {
     );
 };
 
-export default EmailConfirmation;
+export default EmailConfirmed;
