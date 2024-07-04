@@ -1,6 +1,4 @@
-import React from 'react';
-import { useRedirect } from '../../hooks/useRedirect';
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import Form from 'react-bootstrap/Form';
@@ -12,21 +10,21 @@ import styles from '../../styles/CapsuleCreateForm.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import { useRedirect } from '../../hooks/useRedirect';
 
 function CapsuleCreateForm() {
-  useRedirect('loggeout');
+  useRedirect('loggedOut');
   const [capsuleData, setCapsuleData] = useState({
     title: '',
     message: '',
-    date_taken: '',
-    // location: '',
+    release_date: '',
     images: '',
     uploaded_images: [],
     videos: '',
     uploaded_videos: [],
   });
 
-  const { title, message, date_taken, images, videos } = capsuleData;
+  const { title, message, release_date, images, videos } = capsuleData;
 
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
@@ -46,6 +44,7 @@ function CapsuleCreateForm() {
       setCapsuleData({
         ...capsuleData,
         images: URL.createObjectURL(e.target.files[0]),
+        uploaded_images: e.target.files, // Update the state with the uploaded files
       });
     }
   };
@@ -56,6 +55,7 @@ function CapsuleCreateForm() {
       setCapsuleData({
         ...capsuleData,
         videos: URL.createObjectURL(e.target.files[0]),
+        uploaded_videos: e.target.files, // Update the state with the uploaded files
       });
     }
   };
@@ -66,25 +66,32 @@ function CapsuleCreateForm() {
       const formData = new FormData();
       formData.append('title', title);
       formData.append('message', message);
-      formData.append('date_taken', date_taken);
-      // formData.append('location', location);
-      Array.from(imageInput.current.files).forEach((file) => {
-        formData.append('upoladed_images', file);
-      });
-      Array.from(videoInput.current.files).forEach((file) => {
-        formData.append('videos', file);
-      });
+      formData.append('release_date', release_date);
+      formData.append('images', imageInput.current.files[0]);
 
-      const res = await axiosReq.post('/capsules/', formData);
-      console.log('formData');
-      history.push(`/capsules/${res.data.id}`);
+      if (imageInput.current.files.length > 0) {
+        Array.from(imageInput.current.files).forEach((file) => {
+          formData.append('uploaded_images', file);
+        });
+      }
+
+      if (videoInput.current.files.length > 0) {
+        Array.from(videoInput.current.files).forEach((file) => {
+          formData.append('videos', file);
+        });
+      }
+
+      const { data } = await axiosReq.post('/capsules/', formData);
+      history.push(`/capsules/${data.id}`);
+
+      console.log('formData', formData.get('uploaded_images'));
     } catch (err) {
       setErrors(err.response?.data);
     }
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Container>
         <Row>
           <Form.Group controlId='title'>
@@ -119,16 +126,16 @@ function CapsuleCreateForm() {
           ))}
         </Row>
         <Row>
-          <Form.Group controlId='date_taken'>
-            <Form.Label>Date Taken</Form.Label>
+          <Form.Group controlId='release_date'>
+            <Form.Label>Release Date</Form.Label>
             <Form.Control
               type='date'
-              name='date_taken'
-              value={capsuleData.date_taken}
+              name='release_date'
+              value={capsuleData.release_date}
               onChange={handleChange}
             />
           </Form.Group>
-          {errors.date_taken?.map((message, idx) => (
+          {errors.release_date?.map((message, idx) => (
             <Alert variant='warning' key={idx}>
               {message}
             </Alert>
@@ -136,12 +143,12 @@ function CapsuleCreateForm() {
         </Row>
         <Row className='my-5'>
           <Form.Group className='text-center justify-content-between'>
-            {capsuleData.images ? (
+            {images ? (
               <>
                 {Array.from(imageInput.current.files).map((file, idx) => (
                   <figure key={idx}>
                     <Image
-                      className={`"my-2 px-2" ${styles.Image}`}
+                      className={`my-2 px-2 ${styles.Image}`}
                       src={URL.createObjectURL(file)}
                       rounded
                     />
@@ -180,7 +187,7 @@ function CapsuleCreateForm() {
               {message}
             </Alert>
           ))}
-          {errors?.uploaded_images?.map((message, idx) => (
+          {errors.uploaded_images?.map((message, idx) => (
             <Alert variant='warning' key={idx}>
               {message}
             </Alert>
@@ -188,12 +195,12 @@ function CapsuleCreateForm() {
         </Row>
         <Row>
           <Form.Group className='text-center justify-content-between'>
-            {capsuleData.videos ? (
+            {videos ? (
               <>
                 {Array.from(videoInput.current.files).map((file, idx) => (
                   <figure key={idx}>
                     <video
-                      className={`"my-2 px-2" ${styles.Image}`}
+                      className={`my-2 px-2 ${styles.Image}`}
                       src={URL.createObjectURL(file)}
                       rounded
                     />
@@ -214,7 +221,7 @@ function CapsuleCreateForm() {
                 className='d-flex justify-content-center'
                 htmlFor='video-upload'
               >
-                <Asset src={upload} message='Click or tap to upload an video' />
+                <Asset src={upload} message='Click or tap to upload a video' />
               </Form.Label>
             )}
 
@@ -227,11 +234,6 @@ function CapsuleCreateForm() {
               ref={videoInput}
             />
           </Form.Group>
-
-          {/* <Form.Group controlId='videos'>
-        <Form.Label>Videos</Form.Label>
-        <Form.Control type='file' name='videos' onChange={handleChangeVideo} />
-      </Form.Group> */}
           {errors.videos?.map((message, idx) => (
             <Alert variant='warning' key={idx}>
               {message}
@@ -241,7 +243,7 @@ function CapsuleCreateForm() {
         <Row>
           <button
             className={`${btnStyles.Button} ${btnStyles.Blue} mx-auto btn my-5`}
-            onClick={handleSubmit}
+            type='submit'
           >
             Create Capsule
           </button>

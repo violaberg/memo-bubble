@@ -42,12 +42,10 @@ function SignInForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(signInData);
         try {
             const { data } = await axiosReq.post("/dj-rest-auth/login/", signInData);
             setCurrentUser(data.user);
             setTokenTimestamp(data);
-            console.log(data);
             history.goBack();
         } catch (err) {
             setErrors(err.response?.data);
