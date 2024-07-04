@@ -1,6 +1,5 @@
 .App {
-  background: rgb(208,255,160);
-  background: radial-gradient(circle, rgba(208,255,160,1) 26%, rgba(165,247,247,1) 97%);
+  background-image: url(assets/abstract-blur-background.jpg);
   color: #F0F8FF;
   font-family: "Exo 2", sans-serif;
   min-height: 100vh;
@@ -62,7 +61,7 @@ h1 {
 }
 
 h2, h3 {
-  color: #00CCCC;
+  color: #009393;
 }
 
 p {
