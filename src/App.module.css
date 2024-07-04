@@ -1,5 +1,7 @@
 .App {
   background-image: url(assets/abstract-blur-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #F0F8FF;
   font-family: "Exo 2", sans-serif;
   min-height: 100vh;
