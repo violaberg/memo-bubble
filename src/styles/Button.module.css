@@ -1,8 +1,8 @@
 .Button {
     font-size: 0.8rem;
     align-self: center;
-    border-color: #FFA000;
-    color: #030011;
+    border-color: #00cccc;
+    color: #F0F8FF;
     padding: 4px 10px;
     margin-left: 2px;
     margin-right: 2px;
@@ -51,7 +51,7 @@
     /* background-color: #242a3d;
     color: white; */
     background-color: #242a3d;
-    color: aliceblue;
+    color: F0F8FF;
   }
   
   .Black:hover,
@@ -59,12 +59,12 @@
     /* background-color: #dadadf;
     color: #242a3d;
     border-color: #242a3d; */
-    background-color: aliceblue;
+    background-color: F0F8FF;
     color: #242a3d;
   }
   
   .Bright {
-    background-color: #FFA000;
+    background-color: #00cccc;
     color: #010008;
     width: 50%;
   }
