@@ -1,70 +1,29 @@
 .Button {
-    font-size: 0.8rem;
     align-self: center;
-    border-color: #00cccc;
-    color: #F0F8FF;
-    padding: 4px 10px;
-    margin-left: 2px;
-    margin-right: 2px;
-    min-width: 75px;
-  }
-  
-  .Button:hover {
-    opacity: 0.8;
+    background-size: 200% auto;
     border-color: transparent;
-    cursor: pointer;
+    border-radius: 10px;
+    color: #F0F8FF;
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: 0.5s;
   }
+
+.Button:hover {
+  background-position: right center;
+  border-color: transparent;
+}
   
-  .Button:hover:active {
-    background-color: #2142b2 !important;
-  }
-  
-  .Button:active {
-    background-color: #2142b2 !important;
-  }
-  
-  .Button:focus {
-    background-color: #2142b2;
-  }
-  
-  .Wide {
-    padding: 10px 50px;
-    width: 100%;
-  }
-  
-  .Blue,
-  .BlueOutline:hover,
-  .Bright:hover {
-    background-color: #2142b2;
-    color: #ffffff;
-  }
-  
-  .BlueOutline,
-  .Blue:hover {
-    /* border: 1px solid #2142b2; */
-    background-color: #ffffff;
-    color: #2142b2;
-  }
-  
-  .Black,
-  .BlackOutline:hover {
-    /* background-color: #242a3d;
-    color: white; */
-    background-color: #242a3d;
-    color: F0F8FF;
-  }
-  
-  .Black:hover,
-  .BlackOutline {
-    /* background-color: #dadadf;
-    color: #242a3d;
-    border-color: #242a3d; */
-    background-color: F0F8FF;
-    color: #242a3d;
-  }
-  
-  .Bright {
-    background-color: #00cccc;
-    color: #010008;
-    width: 50%;
-  }
+.ButtonPrimary {
+  background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+}
+
+.ButtonSecondary {
+  background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+}
+
+.ButtonDanger {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
