@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 const Bubbles = ({ dataResults }) => {
   const data = dataResults.results || [];
-  console.log('data', data);
-  console.log('dataResults', dataResults);
 
   return (
     <Container>
