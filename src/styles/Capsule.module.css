@@ -1,14 +1,16 @@
 
 .capsule {
-    background-color: #778899;
+    background-color: #030011;
     border: 3px ridge #00CCCC;
     border-radius: 5px;
+    margin: 1.5rem 0;
     padding: 20px;
 }
 
 .capsule p {
     font-size: 1rem;
-    color: #030011;
+    color: #F0F8FF;
+    text-align: center;
 }
 
 .capsulePage {
