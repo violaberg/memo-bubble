@@ -1,6 +1,6 @@
 
 .capsule {
-    background-color: #030011;
+    background-color: #FAF9F6;
     border: 3px ridge #00CCCC;
     border-radius: 5px;
     margin: 1.5rem 0;
@@ -9,7 +9,7 @@
 
 .capsule p {
     font-size: 1rem;
-    color: #F0F8FF;
+    color: #030011;
     text-align: center;
 }
 
