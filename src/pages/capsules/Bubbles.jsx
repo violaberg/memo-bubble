@@ -11,15 +11,15 @@ const Bubbles = ({ dataResults }) => {
       <div>
         Create a new capsule
         {data.map((capsule, index) => (
-          <Link to={`capsules/${capsule.id}`}>
-            <div key={index}>
+          <div key={index}>
+            <Link to={`capsules/${capsule.id}`}>
               <h2>{capsule.title}</h2>
               <p>{capsule.message}</p>
               <p>
                 <strong>Created On: {capsule.created_on}</strong>
               </p>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
     </Container>
