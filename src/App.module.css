@@ -1,5 +1,6 @@
 .App {
   background-image: url(assets/abstract-blur-background.jpg);
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   color: #F0F8FF;
@@ -23,7 +24,7 @@
   background-color: transparent;
   padding: 10px;
   border: 3px ridge #808000;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .FillerImage {

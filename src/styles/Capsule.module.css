@@ -1,8 +1,7 @@
-
 .capsule {
     background-color: #FAF9F6;
     border: 3px ridge #00CCCC;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 1.5rem 0;
     padding: 20px;
 }

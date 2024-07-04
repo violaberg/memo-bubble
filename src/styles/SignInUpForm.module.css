@@ -3,7 +3,7 @@
     margin: 2rem;
   }
   .Input {
-    background: #f5f5f5;
+    background: #FAF9F6;
     border: transparent;
     box-sizing: border-box;
     color: #030003;
@@ -19,7 +19,7 @@
   }
   
   .Link span {
-    color: #ff9254;
+    color: #00cccc;
   }
   
   .Container {
