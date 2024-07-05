@@ -54,7 +54,7 @@ function SignInForm() {
 
     return (
         <Row className={styles.Row}>
-            <Col className="my-auto p-0 p-md-2" md={6}>
+            <Col className="my-auto p-0" sm={12} md={6}>
                 <Container className={`${appStyles.Content} p-4 `}>
                     <h1 className={styles.Header}>Sign in</h1>
                     <Form onSubmit={handleSubmit}>
@@ -93,7 +93,7 @@ function SignInForm() {
                         ))}
 
                         <Button
-                            className={`${btnStyles.Button} ${btnStyles.ButtonPrimary}`}
+                            className={`${btnStyles.Button} ${btnStyles.ButtonSecondary}`}
                             type="submit"
                         >
                             Sign In

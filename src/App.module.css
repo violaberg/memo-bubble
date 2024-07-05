@@ -21,9 +21,9 @@
 }
 
 .Content {
-  background-color: transparent;
+  background-color: #FAF9F6;
   padding: 10px;
-  border: 3px ridge #808000;
+  border: 3px ridge #00cccc;
   border-radius: 10px;
 }
 
