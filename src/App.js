@@ -19,6 +19,9 @@ import Forbidden403 from "./pages/errors/Forbidden403";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import Terms from "./pages/legal/Terms";
 import FAQ from "./pages/legal/FAQ";
+import ContactMessagesList from "./pages/contact/ContactMessagesList";
+import ContactMessage from "./pages/contact/ContactMessage";
+import ContactPage from "./pages/contact/ContactPage";
 
 function App() {
 
@@ -57,6 +60,17 @@ function App() {
           <Route exact path="/privacyPolicy" render={() => <PrivacyPolicy />} />
           <Route exact path="/terms" render={() => <Terms />} />
           <Route exact path="/faq" render={() => <FAQ />} />
+          <Route exact path="/contact" render={() => <ContactPage />} />
+          <Route
+            exact
+            path="/contact_list"
+            render={() => <ContactMessagesList />}
+          />
+          <Route
+            exact
+            path="/contact_list/:id"
+            render={() => <ContactMessage />}
+          />
 
         </Switch>
       </Container>
