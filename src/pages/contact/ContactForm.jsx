@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -17,7 +17,7 @@ import axios from "axios";
 
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
-import { Trans, useTranslation } from "react-i18next";
+//import { Trans, useTranslation } from "react-i18next";
 
 function ContactForm({ listing_id }) {
   /**
@@ -28,14 +28,14 @@ function ContactForm({ listing_id }) {
    */
 
 
-  const { t, i18n } = useTranslation();
+  //const { t, i18n } = useTranslation();
 
-  const lng = navigator.language || navigator.userLanguage;
+  //const lng = navigator.language || navigator.userLanguage;
 
-  useEffect(() => {
+  //useEffect(() => {
 
-    i18n.changeLanguage(lng);
-  }, [i18n, lng]);
+    //i18n.changeLanguage(lng);
+  //}, [i18n, lng]);
 
   const [contactData, setContactData] = useState({
     first_name: "",
@@ -53,7 +53,7 @@ function ContactForm({ listing_id }) {
   const [isChecked, setIsChecked] = useState(false);
   const history = useHistory();
 
-  const message_form = `${t("contactForm.listingMessage")}${listing_id}`;
+  const message_form = `${("contactForm.listingMessage")}${listing_id}`;
   const path = useLocation().pathname;
 
   const [phoneValue, setPhoneValue] = useState();
@@ -83,7 +83,7 @@ function ContactForm({ listing_id }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isChecked) {
-      setErrors({ ...errors, checkbox: [t("contactForm.errorMessage")] });
+      setErrors({ ...errors, checkbox: [("contactForm.errorMessage")] });
       return;
     }
     contactData.phone_number = phoneValue;
@@ -113,14 +113,14 @@ function ContactForm({ listing_id }) {
         xl={listingPagePath ? 12 : 4}
       >
         <Container className={`${appStyles.Content} p-3 p-md-4 rounded shadow`}>
-          <h1 className={styles.Header}>{t("contactForm.title")}</h1>
+          <h1 className={styles.Header}>{ContactForm.title}</h1>
           <Form
             onSubmit={handleSubmit}
             className={`d-flex flex-column ${styles.ContactForm}`}
           >
             <Form.Group controlId="first_name" className="">
               <Form.Label className={styles.FormLabel}>
-                {t("contactForm.name")}<span>* {errors.first_name?.map((message, idx) => (
+                {ContactForm.name}<span>* {errors.first_name?.map((message, idx) => (
                   <span className={styles.ErrorMessage} key={idx}>
                     {message}
                   </span>
@@ -129,7 +129,7 @@ function ContactForm({ listing_id }) {
               <Form.Control
                 className={`${styles.Input} text-start`}
                 type="text"
-                placeholder={t("contactForm.namePlaceholder")}
+                placeholder={ContactForm.namePlaceholder}
                 name="first_name"
                 value={first_name}
                 onChange={handleChange}
@@ -140,7 +140,7 @@ function ContactForm({ listing_id }) {
 
             <Form.Group controlId="last_name">
               <Form.Label className={styles.FormLabel}>
-                {t("contactForm.lastName")}<span>* {errors.last_name?.map((message, idx) => (
+                {ContactForm.lastName}<span>* {errors.last_name?.map((message, idx) => (
                   <span className={styles.ErrorMessage} key={idx}>
                     {message}
                   </span>
@@ -149,7 +149,7 @@ function ContactForm({ listing_id }) {
               <Form.Control
                 className={`${styles.Input} text-start`}
                 type="text"
-                placeholder={t("contactForm.lastNamePlaceholder")}
+                placeholder={ContactForm.lastNamePlaceholder}
                 name="last_name"
                 value={last_name}
                 onChange={handleChange}
@@ -160,7 +160,7 @@ function ContactForm({ listing_id }) {
 
             <Form.Group controlId="email">
               <Form.Label className={styles.FormLabel}>
-                {t("contactForm.email")}<span>* {errors.email?.map((message, idx) => (
+                {ContactForm.email}<span>* {errors.email?.map((message, idx) => (
                   <span className={styles.ErrorMessage} key={idx}>
                     {message}
                   </span>
@@ -169,7 +169,7 @@ function ContactForm({ listing_id }) {
               <Form.Control
                 className={`${styles.Input} text-start`}
                 type="email"
-                placeholder={t("contactForm.emailPlaceholder")}
+                placeholder={ContactForm.emailPlaceholder}
                 name="email"
                 value={email}
                 onChange={handleChange}
@@ -178,7 +178,7 @@ function ContactForm({ listing_id }) {
             </Form.Group>
 
             <Form.Group controlId="phone_number">
-              <Form.Label className={styles.FormLabel}>{t("contactForm.phone")}<span>* {errors.phone_number?.map((message, idx) => (
+              <Form.Label className={styles.FormLabel}>{ContactForm.phone}<span>* {errors.phone_number?.map((message, idx) => (
                 <span className={styles.ErrorMessage} key={idx}>
                   {message}
                 </span>
@@ -199,7 +199,7 @@ function ContactForm({ listing_id }) {
 
             <Form.Group controlId="subject">
               <Form.Label className={styles.FormLabel}>
-                {t("contactForm.subject")}<span>* {errors.subject?.map((message, idx) => (
+                {ContactForm.subject}<span>* {errors.subject?.map((message, idx) => (
                   <span className={styles.ErrorMessage} key={idx}>
                     {message}
                   </span>
@@ -208,7 +208,7 @@ function ContactForm({ listing_id }) {
               <Form.Control
                 className={`${styles.Input} text-start`}
                 type="text"
-                placeholder={t("contactForm.subject")}
+                placeholder={ContactForm.subject}
                 name="subject"
                 value={subject}
                 onChange={handleChange}
@@ -219,7 +219,7 @@ function ContactForm({ listing_id }) {
 
             <Form.Group controlId="message">
               <Form.Label className={styles.FormLabel}>
-                {t("contactForm.message")}<span>* {errors.message?.map((message, idx) => (
+                {ContactForm.message}<span>* {errors.message?.map((message, idx) => (
                   <span className={styles.ErrorMessage} key={idx}>
                     {message}
                   </span>
@@ -232,7 +232,7 @@ function ContactForm({ listing_id }) {
                 placeholder={
                   listingPagePath && !messageDeleted
                     ? message_form
-                    : t("contactForm.messagePlaceholder")
+                    : ContactForm.messagePlaceholder
                 }
                 name="message"
                 value={message}
@@ -245,7 +245,7 @@ function ContactForm({ listing_id }) {
                 className={`${styles.Checkbox}`}
                 type="checkbox"
                 label={<div>
-                  <Trans i18nKey="contactForm.acceptText"
+                  <Container
                     components={{
                       1: <Link to="/terms" style={{ textDecoration: "underline" }} target="_blank" />,
                       2: <Link to="/privacyPolicy" style={{ textDecoration: "underline" }} target="_blank" />
@@ -267,11 +267,11 @@ function ContactForm({ listing_id }) {
               className={`${btnStyles.Button} ${btnStyles.Black} mt-3`}
               type="submit"
             >
-              {t("contactForm.btnSend")}
+              {ContactForm.btnSend}
             </Button>
             {success && (
               <Alert variant="success" className="mt-3">
-                {t("contactForm.successMessage")}
+                {ContactForm.successMessage}
               </Alert>
             )}
             {errors.non_field_errors?.map((message, idx) => (
