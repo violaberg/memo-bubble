@@ -1,0 +1,17 @@
+.footer {
+    background-color: #030011;
+    border-top: 3px ridge #00CCCC;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer ul {
+    list-style-type: none;
+}
+
+span {
+    color: #00CCCC;
+}
