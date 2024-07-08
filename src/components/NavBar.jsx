@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -12,6 +13,7 @@ import {
 import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { removeTokenTimstamp } from "../utils/utils";
 
 const NavBar = () => {
@@ -19,6 +21,15 @@ const NavBar = () => {
   const setCurrentUser = useSetCurrentUser();
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
+  const [legalExpanded, setLegalExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const hanleLegalClick = () => {
+    if (isMobile) {
+      setLegalExpanded(!legalExpanded);
+      setExpanded(true);
+    }
+  };
 
   const handleSignOut = async () => {
     try {
@@ -107,6 +118,14 @@ const NavBar = () => {
               activeClassName={styles.Active}
             >
               <i className="fas fa-user-plus"></i>Add Capsule
+            </NavLink>
+            <NavLink
+              exact
+              className={styles.NavLink}
+              activeClassName={styles.Active}
+              to="/contact"
+            >
+              <i className="fas fa-contact"></i>Contact
             </NavLink>
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
