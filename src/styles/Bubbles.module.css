@@ -1,0 +1,28 @@
+.BubbleContainer {
+  border: 3px ridge #00cccc;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  position: relative;
+  margin: 1rem;
+  box-shadow: -2px 4px 5px 0px #151616;
+}
+
+.Bubble {
+  background-color: #faf9f6;
+  border: 3px ridge #5ccc00;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Bubble:hover {
+  background-color: #00cccc;
+  color: #faf9f6;
+  cursor: pointer;
+}
