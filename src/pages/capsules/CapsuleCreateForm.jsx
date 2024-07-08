@@ -24,7 +24,15 @@ function CapsuleCreateForm() {
     uploaded_videos: [],
   });
 
-  const { title, message, release_date, images, videos } = capsuleData;
+  const {
+    title,
+    message,
+    release_date,
+    images,
+    videos,
+    uploaded_images,
+    uploaded_videos,
+  } = capsuleData;
 
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
@@ -40,51 +48,65 @@ function CapsuleCreateForm() {
 
   const handleChangeImage = (e) => {
     if (e.target.files.length) {
-      URL.revokeObjectURL(capsuleData.images);
+      const fileArray = Array.from(e.target.files);
       setCapsuleData({
         ...capsuleData,
-        images: URL.createObjectURL(e.target.files[0]),
-        uploaded_images: e.target.files, // Update the state with the uploaded files
+        images: URL.createObjectURL(fileArray[0]),
+        uploaded_images: fileArray,
       });
     }
   };
 
   const handleChangeVideo = (e) => {
     if (e.target.files.length) {
-      URL.revokeObjectURL(capsuleData.videos);
+      const fileArray = Array.from(e.target.files);
       setCapsuleData({
         ...capsuleData,
-        videos: URL.createObjectURL(e.target.files[0]),
-        uploaded_videos: e.target.files, // Update the state with the uploaded files
+        videos: URL.createObjectURL(fileArray[0]),
+        uploaded_videos: fileArray,
       });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('message', message);
+    formData.append('release_date', release_date);
+
+    uploaded_images.forEach((file) => {
+      formData.append('uploaded_images', file);
+    });
+
+    uploaded_videos.forEach((file) => {
+      formData.append('videos', file);
+    });
+
+    const metadata = {
+      uploaded_images_metadata: uploaded_images.map(() => ({
+        date_taken: '2024-06-01T12:00:00Z',
+        gemini_messages: [{ message: 'Gemini message for image' }],
+      })),
+      uploaded_videos_metadata: uploaded_videos.map(() => ({
+        date_taken: '2024-06-01T12:00:00Z',
+        gemini_messages: [{ message: 'Gemini message for video' }],
+      })),
+    };
+
+    formData.append(
+      'uploaded_images_metadata',
+      JSON.stringify(metadata.uploaded_images_metadata)
+    );
+    formData.append(
+      'uploaded_videos_metadata',
+      JSON.stringify(metadata.uploaded_videos_metadata)
+    );
+
     try {
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('message', message);
-      formData.append('release_date', release_date);
-      formData.append('images', imageInput.current.files[0]);
-
-      if (imageInput.current.files.length > 0) {
-        Array.from(imageInput.current.files).forEach((file) => {
-          formData.append('uploaded_images', file);
-        });
-      }
-
-      if (videoInput.current.files.length > 0) {
-        Array.from(videoInput.current.files).forEach((file) => {
-          formData.append('videos', file);
-        });
-      }
-
       const { data } = await axiosReq.post('/capsules/', formData);
       history.push(`/capsules/${data.id}`);
-
-      console.log('formData', formData.get('uploaded_images'));
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -143,9 +165,9 @@ function CapsuleCreateForm() {
         </Row>
         <Row className='my-5'>
           <Form.Group className='text-center justify-content-between'>
-            {images ? (
+            {uploaded_images.length > 0 ? (
               <>
-                {Array.from(imageInput.current.files).map((file, idx) => (
+                {uploaded_images.map((file, idx) => (
                   <figure key={idx}>
                     <Image
                       className={`my-2 px-2 ${styles.Image}`}
@@ -195,14 +217,15 @@ function CapsuleCreateForm() {
         </Row>
         <Row>
           <Form.Group className='text-center justify-content-between'>
-            {videos ? (
+            {uploaded_videos.length > 0 ? (
               <>
-                {Array.from(videoInput.current.files).map((file, idx) => (
+                {uploaded_videos.map((file, idx) => (
                   <figure key={idx}>
                     <video
                       className={`my-2 px-2 ${styles.Image}`}
                       src={URL.createObjectURL(file)}
                       rounded
+                      controls
                     />
                   </figure>
                 ))}
