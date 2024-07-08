@@ -17,6 +17,7 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./pages/errors/NotFound";
 import Forbidden403 from "./pages/errors/Forbidden403";
+import Footer from './components/Footer';
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import Terms from "./pages/legal/Terms";
 import FAQ from "./pages/legal/FAQ";
@@ -95,6 +96,7 @@ function App() {
             />
 
           </Switch>
+          <Footer />
         </Container>
         <Container />
             <>
