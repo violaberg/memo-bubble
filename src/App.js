@@ -19,6 +19,7 @@ import NotFound from "./pages/errors/NotFound";
 import Forbidden403 from "./pages/errors/Forbidden403";
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import Terms from "./pages/legal/Terms";
 import FAQ from "./pages/legal/FAQ";
@@ -55,6 +56,7 @@ function App() {
         <Container className={styles.Main}>
           <Switch>
             <Route exact path="/" render={() => <Home/>} />
+            <Route exact path="/about" render={() => <About/>} />
             <Route exact path="/signin" render={() => <SignInForm />} />
             <Route exact path="/signup" render={() => <SignUpForm />} />
             <Route exact path="/email-sent" render={() => <EmailSent />} />
