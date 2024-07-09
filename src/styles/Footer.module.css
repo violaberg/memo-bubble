@@ -3,7 +3,7 @@
     bottom: 0;
     border-top: 3px ridge #00CCCC;
     padding: 1rem;
-    position: fixed;
+    position: relative;
     text-align: center;
     width: 100%;
 }
