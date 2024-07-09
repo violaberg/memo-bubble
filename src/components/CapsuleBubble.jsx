@@ -36,12 +36,14 @@ const Capsule = ({ ...props }) => {
           <h2>Images</h2>
           {imagesArray?.map((image, id) => (
             <div>
-              <img
-                key={id}
-                src={image.url}
-                alt='capsule'
-                style={{ width: '100%', height: 'auto' }}
-              />
+              <div className={styles.polaroid}>
+                <img
+                  key={id}
+                  src={image.url}
+                  alt='capsule'
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </div>
               <strong>Date taken : {image.date_taken}</strong>
               <h3>Gemini message</h3>
 
@@ -53,12 +55,14 @@ const Capsule = ({ ...props }) => {
           <h2>Videos</h2>
           {videosArray?.map((video, id) => (
             <div>
-              <video
-                key={id}
-                src={video.url}
-                controls
-                style={{ width: '100%', height: 'auto' }}
-              />
+              <div className={styles.filmstrip}>
+                <video
+                  key={id}
+                  src={video.url}
+                  controls
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </div>
               <strong>Date taken : {video.date_taken}</strong>
               <h3>Gemini message</h3>
 
