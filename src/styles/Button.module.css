@@ -18,16 +18,20 @@
   
 .ButtonPrimary {
   background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+  border: 3px ridge #a6c1ee;
 }
 
 .ButtonSecondary {
   background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+  border: 3px ridge #8fd3f4;
 }
 
 .ButtonTertiary {
   background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+  border: 3px ridge #c2e9fb;
 }
 
 .ButtonDanger {
   background-image: linear-gradient(to right, #fedeba 0%, #ff5f5f 51%, #fedeba 100%);
+  border: 3px ridge #ff5f5f;
 }

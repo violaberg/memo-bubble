@@ -18,6 +18,7 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./pages/errors/NotFound";
 import Forbidden403 from "./pages/errors/Forbidden403";
 import Footer from './components/Footer';
+import Home from './pages/Home';
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import Terms from "./pages/legal/Terms";
 import FAQ from "./pages/legal/FAQ";
@@ -53,7 +54,7 @@ function App() {
         <NavBar />
         <Container className={styles.Main}>
           <Switch>
-            <Route exact path="/" render={() => <h1>Home</h1>} />
+            <Route exact path="/" render={() => <Home/>} />
             <Route exact path="/signin" render={() => <SignInForm />} />
             <Route exact path="/signup" render={() => <SignUpForm />} />
             <Route exact path="/email-sent" render={() => <EmailSent />} />
