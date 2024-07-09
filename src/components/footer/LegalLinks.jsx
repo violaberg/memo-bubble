@@ -4,7 +4,7 @@ import styles from "../../styles/Footer.module.css";
 const LegalLinks = () => {
   return (
     <div className={styles.legalLinks}>
-      <h5>Legal</h5>
+      <h3 className={styles.footerHeader}>Legal</h3>
       <ul>
         <li>
           <a href="/privacy">Privacy Policy</a>
