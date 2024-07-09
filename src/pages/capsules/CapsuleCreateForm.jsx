@@ -179,7 +179,7 @@ function CapsuleCreateForm() {
 
                 <div>
                   <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.Bright} btn`}
+                    className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} btn`}
                     htmlFor='image-upload'
                   >
                     Change the image
@@ -232,7 +232,7 @@ function CapsuleCreateForm() {
 
                 <div>
                   <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.Bright} btn`}
+                    className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} btn`}
                     htmlFor='video-upload'
                   >
                     Change the video
@@ -265,7 +265,7 @@ function CapsuleCreateForm() {
         </Row>
         <Row>
           <button
-            className={`${btnStyles.Button} ${btnStyles.Blue} mx-auto btn my-5`}
+            className={`${btnStyles.Button} ${btnStyles.ButtonPrimary} mx-auto btn my-5`}
             type='submit'
           >
             Create Capsule

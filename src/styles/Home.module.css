@@ -1,10 +1,19 @@
 .logoImg {
     border: 3px ridge #00cccc;
     border-radius: 5px;
-    margin: 2rem;
-    width: 300px;
+    margin: 0 auto;
+    width: 260px;
 }
 
 .brandName {
     color: #00cccc;
+}
+
+section {
+    padding-top: 1rem;
+    text-align: justify;
+}
+
+p {
+    color: #030011;
 }
