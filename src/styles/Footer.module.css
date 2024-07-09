@@ -27,3 +27,7 @@
 .developerDetails {
     padding-top: 0.5rem;
 }
+
+span, .copyRight {
+    color: #F0F8FF;
+}
