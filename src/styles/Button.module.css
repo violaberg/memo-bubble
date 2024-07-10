@@ -4,6 +4,7 @@
     border-color: transparent;
     border-radius: 10px;
     color: #F0F8FF;
+    font-weight: 500;
     flex: 1 1 auto;
     margin: 10px;
     padding: 10px 20px;
@@ -19,19 +20,23 @@
 .ButtonPrimary {
   background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
   border: 3px ridge #a6c1ee;
+  color: #4b6eaa;
 }
 
 .ButtonSecondary {
   background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
   border: 3px ridge #8fd3f4;
+  color: #3e86aa;
 }
 
 .ButtonTertiary {
   background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
   border: 3px ridge #c2e9fb;
+  color: #60c9fa;
 }
 
 .ButtonDanger {
   background-image: linear-gradient(to right, #fedeba 0%, #ff5f5f 51%, #fedeba 100%);
   border: 3px ridge #ff5f5f;
+  color: #d12f2f;
 }
