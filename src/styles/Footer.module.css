@@ -29,6 +29,16 @@
     padding-top: 0.5rem;
 }
 
-span, .copyRight {
+span,
+.copyRight,
+.gemini {
     color: #F0F8FF;
 }
+
+.GradientText {
+    background: linear-gradient(90deg, hsla(216, 99%, 56%, 1) 0%, hsla(350, 76%, 62%, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.3rem;
+  }
