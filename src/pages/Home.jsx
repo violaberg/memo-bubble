@@ -11,7 +11,7 @@ const Home = () => {
       <Container className="flex justify-content-center text-center my-3">
         <Row className="m-auto">
           <Col>
-            <h1>Welcome to <span className={styles.brandName}>MEMO BUBBLE</span>!</h1>
+            <h1>Welcome to <span className={styles.brandName}>MEMO BUBBLE</span></h1>
             <img src={logo} alt="logo" className={styles.logoImg}></img>
           </Col>
           <Row className="mx-auto">

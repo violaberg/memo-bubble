@@ -6,7 +6,10 @@
 }
 
 .brandName {
-    color: #00cccc;
+    background: linear-gradient(90deg, hsla(216, 99%, 56%, 1) 0%, hsla(350, 76%, 62%, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 section {
