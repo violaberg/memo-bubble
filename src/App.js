@@ -55,8 +55,8 @@ function App() {
         <NavBar />
         <Container className={styles.Main}>
           <Switch>
-            <Route exact path="/" render={() => <Home/>} />
-            <Route exact path="/about" render={() => <About/>} />
+            <Route exact path="/" render={() => <Home />} />
+            <Route exact path="/about" render={() => <About />} />
             <Route exact path="/signin" render={() => <SignInForm />} />
             <Route exact path="/signup" render={() => <SignUpForm />} />
             <Route exact path="/email-sent" render={() => <EmailSent />} />
@@ -99,40 +99,41 @@ function App() {
             />
 
           </Switch>
-          <Footer />
-        </Container>
-        <Container />
-            <>
-              <CookieConsent
-                location="bottom"
-                buttonText="Accept All Cookies"
-                declineButtonText="Decline Non-Essential Cookies"
-                enableDeclineButton
-                visible={showCookieBanner}
-                onAccept={() => {
-                  setNonEssentialConsent(true);
-                  setShowCookieBanner("hidden");
-                  document.cookie = "nonEssentialCookies=true; path=/; max-age=31536000";
-                }}
-                onDecline={() => {
-                  setNonEssentialConsent(false);
-                  setShowCookieBanner("hidden");
-                  document.cookie = "nonEssentialCookies=false; path=/; max-age=31536000";
-                }}
-                cookieName="nonEssentialCookies"
-                containerClasses="d-flex justify-content-center align-items-center"
-                contentClasses={`${styles.CookieBannerContent} m-0 ps-1 pt-1`}
-                buttonWrapperClasses={`${styles.CookieBannerButtonWrapper} m-0`}
-                buttonClasses="m-0 me-1"
 
-              >
-                This website uses cookies to enhance your browsing experience, provide personalized content, and analyze our traffic. We also use cookies from third-party services like Google Maps to display interactive maps. By clicking "Accept All Cookies", you consent to our use of all cookies. If you choose to "Decline Non-Essential Cookies", Google Maps and other third-party services will be disabled, but essential cookies for the proper functioning of the site will still be set. <a href="/privacyPolicy" style={{ color: '#fefefe', textDecoration: 'underline' }}>Learn more</a>.
-              </CookieConsent>
-              <div className={styles.CookieReset}><i onClick={() => {
-                setShowCookieBanner("show");
-              }} className="fa-solid fa-link"></i>
-              </div>
-            </>
+        </Container>
+        <Footer />
+        <Container />
+        <>
+          <CookieConsent
+            location="bottom"
+            buttonText="Accept All Cookies"
+            declineButtonText="Decline Non-Essential Cookies"
+            enableDeclineButton
+            visible={showCookieBanner}
+            onAccept={() => {
+              setNonEssentialConsent(true);
+              setShowCookieBanner("hidden");
+              document.cookie = "nonEssentialCookies=true; path=/; max-age=31536000";
+            }}
+            onDecline={() => {
+              setNonEssentialConsent(false);
+              setShowCookieBanner("hidden");
+              document.cookie = "nonEssentialCookies=false; path=/; max-age=31536000";
+            }}
+            cookieName="nonEssentialCookies"
+            containerClasses="d-flex justify-content-center align-items-center"
+            contentClasses={`${styles.CookieBannerContent} m-0 ps-1 pt-1`}
+            buttonWrapperClasses={`${styles.CookieBannerButtonWrapper} m-0`}
+            buttonClasses="m-0 me-1"
+
+          >
+            This website uses cookies to enhance your browsing experience, provide personalized content, and analyze our traffic. We also use cookies from third-party services like Google Maps to display interactive maps. By clicking "Accept All Cookies", you consent to our use of all cookies. If you choose to "Decline Non-Essential Cookies", Google Maps and other third-party services will be disabled, but essential cookies for the proper functioning of the site will still be set. <a href="/privacyPolicy" style={{ color: '#fefefe', textDecoration: 'underline' }}>Learn more</a>.
+          </CookieConsent>
+          <div className={styles.CookieReset}><i onClick={() => {
+            setShowCookieBanner("show");
+          }} className="fa-solid fa-link"></i>
+          </div>
+        </>
 
       </div>
     </HelmetProvider>
