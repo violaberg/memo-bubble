@@ -6,17 +6,16 @@ import styles from '../styles/Home.module.css';
 import btnStyles from '../styles/Button.module.css';
 
 const Home = () => {
-  return (
-    <Container className='flex justify-content-center text-center my-3'>
-      <Row className='m-auto'>
-        <Col>
-          <h1>
-            Welcome to <span className={styles.brandName}>MEMO BUBBLE</span>!
-          </h1>
-          <img src={logo} alt='logo' className={styles.logoImg}></img>
-        </Col>
-        <Row className='mx-auto'>
-          <Col className='mx-auto' md={10}>
+
+    return (
+      <Container className="flex justify-content-center text-center my-3">
+        <Row className="m-auto">
+          <Col>
+            <h1>Welcome to <span className={styles.brandName}>MEMO BUBBLE</span></h1>
+            <img src={logo} alt="logo" className={styles.logoImg}></img>
+          </Col>
+          <Row className="mx-auto">
+            <Col className="mx-auto" md={10}>
             <section>
               <p>
                 Memories are the threads that weave the tapestry of our lives,
