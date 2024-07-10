@@ -14,6 +14,9 @@ import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faInfo, faSignInAlt, faUserPlus, faCirclePlus, faSignOutAlt, faPhotoFilm } from '@fortawesome/free-solid-svg-icons';
+
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -35,7 +38,7 @@ const NavBar = () => {
     <>
 
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
-        <i className="fas fa-sign-out-alt"></i>Sign out
+        <FontAwesomeIcon icon={faSignOutAlt} />Sign out
       </NavLink>
       <NavLink
         className={styles.NavLink}
@@ -53,14 +56,14 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/signin"
       >
-        <i className="fas fa-sign-in-alt"></i>Sign in
+        <FontAwesomeIcon icon={faSignInAlt} /> Sign in
       </NavLink>
       <NavLink
         to="/signup"
         className={styles.NavLink}
         activeClassName={styles.Active}
       >
-        <i className="fas fa-user-plus"></i>Sign up
+        <FontAwesomeIcon icon={faUserPlus} /> Sign up
       </NavLink>
 
     </>
@@ -94,21 +97,29 @@ const NavBar = () => {
               activeClassName={styles.Active}
               to="/"
             >
-              <i className="fas fa-home"></i>Home
+              <FontAwesomeIcon icon={faHome}/> Home
+            </NavLink>
+            <NavLink
+              exact
+              className={styles.NavLink}
+              activeClassName={styles.Active}
+              to="/about"
+            >
+              <FontAwesomeIcon icon={faInfo} /> About
             </NavLink>
             <NavLink
               to="/capsules"
               className={styles.NavLink}
               activeClassName={styles.Active}
             >
-              <i className="fas fa-user-plus"></i>Capsules
+              <FontAwesomeIcon icon={faPhotoFilm} /> Capsules
             </NavLink>
             <NavLink
               to="/capsules/create"
               className={styles.NavLink}
               activeClassName={styles.Active}
             >
-              <i className="fas fa-user-plus"></i>Add Capsule
+              <FontAwesomeIcon icon={faCirclePlus} /> Add Capsule
             </NavLink>
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>

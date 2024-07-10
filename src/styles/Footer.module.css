@@ -10,6 +10,7 @@
 
 .footer ul {
     list-style-type: none;
+    margin-left: -2.5rem;
 }
 
 .footerHeader {
