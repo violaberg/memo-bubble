@@ -10,13 +10,13 @@ const Footer = () => {
         <footer className={styles.footer}>
             <Container fluid>
                 <Row>
-                    <Col md={4}>
+                    <Col className='text-center' md={4}>
                         <InfoLinks />
                     </Col>
-                    <Col md={4}>
+                    <Col className='text-center' md={4}>
                         <LegalLinks />
                     </Col>
-                    <Col md={4}>
+                    <Col className='text-center' md={4}>
                         <DeveloperDetails />
                     </Col>
                 </Row>

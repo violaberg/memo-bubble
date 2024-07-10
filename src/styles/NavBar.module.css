@@ -21,7 +21,7 @@
 }
 
 .NavLink {
-  padding: 8px 5px;
+  padding: 8px 7px;
   font-weight: 500;
   color: #00CCCC;
 }
@@ -47,6 +47,10 @@
 .NavBarMobile {
   background-color: rgb(3, 0, 17, 1);
   max-width: 100vw;
+}
+
+svg {
+  color: #808000;
 }
 
 /*Responsive*/
