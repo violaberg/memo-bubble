@@ -4,6 +4,7 @@ import InfoLinks from './footer/InfoLinks';
 import LegalLinks from './footer/LegalLinks';
 import DeveloperDetails from './footer/DeveloperDetails';
 import styles from "../styles/Footer.module.css";
+import gemini from "../assets/Gemini.png";
 
 const Footer = () => {
     return (
@@ -22,6 +23,9 @@ const Footer = () => {
                 </Row>
                 <Row>
                     <Col>
+                        <p className={styles.gemini}>
+                        Supported by <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer"><span className={styles.GradientText}>Gemini</span></a>
+                        </p>
                         <p className={styles.copyRight}>
                             &copy; 2024 All rights reserved <span className={styles.brandName}>MEMO BUBBLE</span>
                         </p>
