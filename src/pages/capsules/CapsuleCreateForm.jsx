@@ -1,16 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
+import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
-import Image from 'react-bootstrap/Image';
-import Asset from '../../components/Asset';
-import upload from '../../assets/upload.png';
-import styles from '../../styles/CapsuleCreateForm.module.css';
-import btnStyles from '../../styles/Button.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useRedirect } from '../../hooks/useRedirect';
+import CreatEditFormFields from '../../components/CreatEditFormFields';
+import CreateEditFormImages from '../../components/CreateEditFormImages';
+import CreateEditFormVideos from '../../components/CreateEditFormVideos';
+import btnStyles from '../../styles/Button.module.css';
 
 function CapsuleCreateForm() {
   useRedirect('loggedOut');
@@ -20,24 +20,27 @@ function CapsuleCreateForm() {
     release_date: '',
     images: '',
     uploaded_images: [],
-    videos: '',
     uploaded_videos: [],
   });
 
-  const {
-    title,
-    message,
-    release_date,
-    images,
-    videos,
-    uploaded_images,
-    uploaded_videos,
-  } = capsuleData;
-
+  const { title, message, release_date, uploaded_images, uploaded_videos } =
+    capsuleData;
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
   const videoInput = useRef(null);
   const history = useHistory();
+
+  useEffect(() => {
+    return () => {
+      uploaded_images.forEach((image) => {
+        URL.revokeObjectURL(image.preview);
+      });
+      uploaded_videos.forEach((video) => {
+        URL.revokeObjectURL(video.preview);
+      });
+    };
+  }, [uploaded_images, uploaded_videos]);
 
   const handleChange = (e) => {
     setCapsuleData({
@@ -48,10 +51,13 @@ function CapsuleCreateForm() {
 
   const handleChangeImage = (e) => {
     if (e.target.files.length) {
-      const fileArray = Array.from(e.target.files);
+      const fileArray = Array.from(e.target.files).map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+        date_taken: '',
+      }));
       setCapsuleData({
         ...capsuleData,
-        images: URL.createObjectURL(fileArray[0]),
         uploaded_images: fileArray,
       });
     }
@@ -59,42 +65,101 @@ function CapsuleCreateForm() {
 
   const handleChangeVideo = (e) => {
     if (e.target.files.length) {
-      const fileArray = Array.from(e.target.files);
+      const fileArray = Array.from(e.target.files).map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+        date_taken: '',
+      }));
       setCapsuleData({
         ...capsuleData,
-        videos: URL.createObjectURL(fileArray[0]),
         uploaded_videos: fileArray,
       });
     }
   };
 
+  const handleDateChange = (type, idx, e) => {
+    const updatedArray = type === 'image' ? uploaded_images : uploaded_videos;
+    const updatedFiles = updatedArray.map((item, itemIdx) =>
+      itemIdx === idx ? { ...item, date_taken: e.target.value } : item
+    );
+    setCapsuleData({
+      ...capsuleData,
+      [type === 'image' ? 'uploaded_images' : 'uploaded_videos']: updatedFiles,
+    });
+  };
+
+  const getPresignedUrl = async (fileName) => {
+    const response = await axiosReq.get(
+      `/generate_presigned_url/?file_name=${fileName}`
+    );
+    console.log('response', response.data);
+    return response.data;
+  };
+
+  const uploadFileToS3 = async (file, presignedUrl) => {
+    const formData = new FormData();
+    Object.keys(presignedUrl.fields).forEach((key) => {
+      formData.append(key, presignedUrl.fields[key]);
+    });
+    formData.append('file', file);
+
+    await axios.post(presignedUrl.url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setUploadProgress(
+          (prevProgress) =>
+            prevProgress + percentCompleted / uploaded_videos.length
+        );
+      },
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUploadProgress(0);
+
+    const uploadedImageUrls = [];
+    for (const { file } of uploaded_images) {
+      const presignedUrl = await getPresignedUrl(file.name);
+      await uploadFileToS3(file, presignedUrl);
+      uploadedImageUrls.push(presignedUrl.url + presignedUrl.fields.key);
+    }
+
+    const uploadedVideoUrls = [];
+    for (const { file } of uploaded_videos) {
+      const presignedUrl = await getPresignedUrl(file.name);
+      await uploadFileToS3(file, presignedUrl);
+      uploadedVideoUrls.push(presignedUrl.url + presignedUrl.fields.key);
+    }
+
+    const metadata = {
+      uploaded_images_metadata: uploaded_images.map(
+        ({ date_taken, file }, idx) => ({
+          url: uploadedImageUrls[idx],
+          date_taken: `${date_taken}T12:00:00Z`,
+          gemini_messages: [
+            { message: `Gemini message for image ${file.name}` },
+          ],
+        })
+      ),
+      uploaded_videos_metadata: uploaded_videos.map(
+        ({ date_taken, file }, idx) => ({
+          url: uploadedVideoUrls[idx],
+          date_taken: `${date_taken}T12:00:00Z`,
+          gemini_messages: [
+            { message: `Gemini message for video ${file.name}` },
+          ],
+        })
+      ),
+    };
 
     const formData = new FormData();
     formData.append('title', title);
     formData.append('message', message);
     formData.append('release_date', release_date);
-
-    uploaded_images.forEach((file) => {
-      formData.append('uploaded_images', file);
-    });
-
-    uploaded_videos.forEach((file) => {
-      formData.append('videos', file);
-    });
-
-    const metadata = {
-      uploaded_images_metadata: uploaded_images.map(() => ({
-        date_taken: '2024-06-01T12:00:00Z',
-        gemini_messages: [{ message: 'Gemini message for image' }],
-      })),
-      uploaded_videos_metadata: uploaded_videos.map(() => ({
-        date_taken: '2024-06-01T12:00:00Z',
-        gemini_messages: [{ message: 'Gemini message for video' }],
-      })),
-    };
-
     formData.append(
       'uploaded_images_metadata',
       JSON.stringify(metadata.uploaded_images_metadata)
@@ -105,7 +170,14 @@ function CapsuleCreateForm() {
     );
 
     try {
-      const { data } = await axiosReq.post('/capsules/', formData);
+      const { data } = await axiosReq.post('/capsules/', formData, {
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setUploadProgress(percentCompleted);
+        },
+      });
       history.push(`/capsules/${data.id}`);
     } catch (err) {
       setErrors(err.response?.data);
@@ -115,157 +187,42 @@ function CapsuleCreateForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <Container>
-        <Row>
-          <Form.Group controlId='title'>
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              type='text'
-              name='title'
-              value={capsuleData.title}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          {errors.title?.map((message, idx) => (
-            <Alert variant='warning' key={idx}>
-              {message}
-            </Alert>
-          ))}
-        </Row>
-        <Row>
-          <Form.Group controlId='message'>
-            <Form.Label>Message</Form.Label>
-            <Form.Control
-              as='textarea'
-              name='message'
-              value={capsuleData.message}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          {errors.message?.map((message, idx) => (
-            <Alert variant='warning' key={idx}>
-              {message}
-            </Alert>
-          ))}
-        </Row>
-        <Row>
-          <Form.Group controlId='release_date'>
-            <Form.Label>Release Date</Form.Label>
-            <Form.Control
-              type='date'
-              name='release_date'
-              value={capsuleData.release_date}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          {errors.release_date?.map((message, idx) => (
-            <Alert variant='warning' key={idx}>
-              {message}
-            </Alert>
-          ))}
-        </Row>
-        <Row className='my-5'>
-          <Form.Group className='text-center justify-content-between'>
-            {uploaded_images.length > 0 ? (
-              <>
-                {uploaded_images.map((file, idx) => (
-                  <figure key={idx}>
-                    <Image
-                      className={`my-2 px-2 ${styles.Image}`}
-                      src={URL.createObjectURL(file)}
-                      rounded
-                    />
-                  </figure>
-                ))}
-
-                <div>
-                  <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} btn`}
-                    htmlFor='image-upload'
-                  >
-                    Change the image
-                  </Form.Label>
-                </div>
-              </>
-            ) : (
-              <Form.Label
-                className='d-flex justify-content-center'
-                htmlFor='image-upload'
-              >
-                <Asset src={upload} message='Click or tap to upload an image' />
-              </Form.Label>
-            )}
-
-            <input
-              type='file'
-              multiple
-              id='image-upload'
-              accept='image/*'
-              onChange={handleChangeImage}
-              ref={imageInput}
-            />
-          </Form.Group>
-          {errors.images?.map((message, idx) => (
-            <Alert variant='warning' key={idx}>
-              {message}
-            </Alert>
-          ))}
-          {errors.uploaded_images?.map((message, idx) => (
-            <Alert variant='warning' key={idx}>
-              {message}
-            </Alert>
-          ))}
-        </Row>
-        <Row>
-          <Form.Group className='text-center justify-content-between'>
-            {uploaded_videos.length > 0 ? (
-              <>
-                {uploaded_videos.map((file, idx) => (
-                  <figure key={idx}>
-                    <video
-                      className={`my-2 px-2 ${styles.Image}`}
-                      src={URL.createObjectURL(file)}
-                      rounded
-                      controls
-                    />
-                  </figure>
-                ))}
-
-                <div>
-                  <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} btn`}
-                    htmlFor='video-upload'
-                  >
-                    Change the video
-                  </Form.Label>
-                </div>
-              </>
-            ) : (
-              <Form.Label
-                className='d-flex justify-content-center'
-                htmlFor='video-upload'
-              >
-                <Asset src={upload} message='Click or tap to upload a video' />
-              </Form.Label>
-            )}
-
-            <input
-              type='file'
-              multiple
-              id='video-upload'
-              accept='video/*'
-              onChange={handleChangeVideo}
-              ref={videoInput}
-            />
-          </Form.Group>
-          {errors.videos?.map((message, idx) => (
-            <Alert variant='warning' key={idx}>
-              {message}
-            </Alert>
-          ))}
-        </Row>
+        <CreatEditFormFields
+          capsuleData={capsuleData}
+          errors={errors}
+          handleChange={handleChange}
+        />
+        <CreateEditFormImages
+          capsuleData={capsuleData}
+          errors={errors}
+          handleChangeImage={handleChangeImage}
+          imageInput={imageInput}
+          handleDateChange={handleDateChange}
+        />
+        <CreateEditFormVideos
+          capsuleData={capsuleData}
+          errors={errors}
+          handleChangeVideo={handleChangeVideo}
+          videoInput={videoInput}
+          handleDateChange={handleDateChange}
+        />
+        {uploadProgress > 0 && (
+          <div className='progress'>
+            <div
+              className='progress-bar'
+              role='progressbar'
+              style={{ width: `${uploadProgress}%` }}
+              aria-valuenow={uploadProgress}
+              aria-valuemin='0'
+              aria-valuemax='100'
+            >
+              {uploadProgress}%
+            </div>
+          </div>
+        )}
         <Row>
           <button
-            className={`${btnStyles.Button} ${btnStyles.ButtonPrimary} mx-auto btn my-5`}
+            className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} mx-auto btn mb-5`}
             type='submit'
           >
             Create Capsule
