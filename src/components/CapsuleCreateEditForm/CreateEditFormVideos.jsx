@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Row from 'react-bootstrap/Row';
-import Asset from './Asset';
+import Asset from '../Asset';
 import upload from '../assets/upload.png';
 import styles from '../styles/CapsuleCreateForm.module.css';
 import btnStyles from '../styles/Button.module.css';
