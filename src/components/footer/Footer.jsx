@@ -3,8 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import InfoLinks from './InfoLinks';
 import LegalLinks from './LegalLinks';
 import DeveloperDetails from './DeveloperDetails';
-import styles from "../styles/Footer.module.css";
-import gemini from "../assets/Gemini.png";
+import styles from "../../styles/Footer.module.css";
+import gemini from "../../assets/Gemini.png";
 
 const Footer = () => {
     return (
