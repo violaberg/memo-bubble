@@ -1,8 +1,9 @@
-import React from "react";
-import Spinner from "react-bootstrap/Spinner";
-import styles from "../styles/Asset.module.css";
+import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
+import styles from '../styles/Asset.module.css';
+import btnStyles from '../styles/Button.module.css';
 
-const Asset = ({ spinner, src, message }) => {
+const Asset = ({ spinner, src, message, animation, variant }) => {
   /**
    * The Asset component is a functional component that renders an asset, such as an image or a spinner.
    * It contains a spinner, an image, or a message.
@@ -14,9 +15,9 @@ const Asset = ({ spinner, src, message }) => {
 
   return (
     <div className={`${styles.Asset} p-4`}>
-      {spinner && <Spinner animation="border" />}
+      {spinner && <Spinner animation={animation} variant={variant} />}
       {src && <img src={src} alt={message} />}
-      {message && <p className="mt-4">{message}</p>}
+      {message && <p className='mt-4'>{message}</p>}
     </div>
   );
 };

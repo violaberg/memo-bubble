@@ -14,7 +14,7 @@ const CapsulePage = () => {
   return (
     <div className={styles.capsulePage}>
       <h1>Bubbles</h1>
-      <Bubbles dataResults={dataResults} />
+      <Bubbles dataResults={dataResults} hasLoaded={loaded} />
     </div>
   );
 };
