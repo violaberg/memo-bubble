@@ -38,13 +38,15 @@ function CapsuleCreateForm() {
   const imageInput = useRef(null);
   const videoInput = useRef(null);
   const history = useHistory();
+  const [generatedText, setGeneratedText] = useState('');
+  const [editableGeneratedText, setEditableGeneratedText] = useState('');
 
   const { GoogleGenerativeAI } = require('@google/generative-ai');
 
   // Access your API key as an environment variable (see "Set up your API key" above)
   const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
 
-  async function run() {
+  const run = async () => {
     // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
     const model = genAI.getGenerativeModel({
       model: 'gemini-1.5-flash',
@@ -58,7 +60,7 @@ function CapsuleCreateForm() {
     const text = response.text();
     console.log(text);
     return text;
-  }
+  };
 
   const [executionCount, setExecutionCount] = React.useState(0);
   const [lastExecutionTime, setLastExecutionTime] = React.useState(null);
@@ -227,11 +229,18 @@ function CapsuleCreateForm() {
       //   },
       // });
       // history.push(`/capsules/${data.id}`);
+      const generatedMessage = await run();
+      setGeneratedText(generatedMessage);
+      setEditableGeneratedText(generatedMessage);
       console.log('formData', formData.get('gemini_message'));
       executeRun();
     } catch (err) {
       setErrors(err.response?.data);
     }
+  };
+
+  const handleEditableTextChange = (e) => {
+    setEditableGeneratedText(e.target.value);
   };
 
   return (
@@ -265,9 +274,34 @@ function CapsuleCreateForm() {
             name='gemini_message'
             value={capsuleData.gemini_message}
             onChange={handleChange}
-            style={{ height: '100px', color: 'black' }}
+            style={{ color: 'black' }}
           />
         </Form.Group>
+        <Form.Group>
+          <Form.Label
+            htmlFor='generated_gemini_message'
+            style={{ color: 'black' }}
+          >
+            Generated Gemini message
+          </Form.Label>
+          <Form.Control
+            as='textarea'
+            rows={editableGeneratedText.length / 50}
+            name='generated_gemini_message'
+            onChange={handleEditableTextChange}
+            value={editableGeneratedText}
+          />
+        </Form.Group>
+
+        <div>
+          {gemini_message && (
+            <Alert variant='info'>
+              <p>Generated Gemini message:</p>
+
+              <p>{generatedText}</p>
+            </Alert>
+          )}
+        </div>
         {uploadProgress > 0 && (
           <div className='progress'>
             <div
