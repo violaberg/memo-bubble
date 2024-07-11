@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk';
 
 AWS.config.update({
-  region: 'eu-north-1',
+  region: 'eu-west-1',
   accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
 });
