@@ -7,9 +7,9 @@ import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useRedirect } from '../../hooks/useRedirect';
-import CreatEditFormFields from '../../components/CreatEditFormFields';
-import CreateEditFormImages from '../../components/CreateEditFormImages';
-import CreateEditFormVideos from '../../components/CreateEditFormVideos';
+import CreatEditFormFields from '../../components/CapsuleCreateEditForm/CreatEditFormFields';
+import CreateEditFormImages from '../../components/CapsuleCreateEditForm/CreateEditFormImages';
+import CreateEditFormVideos from '../../components/CapsuleCreateEditForm/CreateEditFormVideos';
 import btnStyles from '../../styles/Button.module.css';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
