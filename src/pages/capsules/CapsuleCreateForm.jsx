@@ -39,6 +39,7 @@ function CapsuleCreateForm() {
   const videoInput = useRef(null);
   const history = useHistory();
   const [generatedText, setGeneratedText] = useState('');
+  const [editableGeneratedText, setEditableGeneratedText] = useState('');
 
   const { GoogleGenerativeAI } = require('@google/generative-ai');
 
@@ -230,11 +231,16 @@ function CapsuleCreateForm() {
       // history.push(`/capsules/${data.id}`);
       const generatedMessage = await run();
       setGeneratedText(generatedMessage);
+      setEditableGeneratedText(generatedMessage);
       console.log('formData', formData.get('gemini_message'));
       executeRun();
     } catch (err) {
       setErrors(err.response?.data);
     }
+  };
+
+  const handleEditableTextChange = (e) => {
+    setEditableGeneratedText(e.target.value);
   };
 
   return (
@@ -268,13 +274,30 @@ function CapsuleCreateForm() {
             name='gemini_message'
             value={capsuleData.gemini_message}
             onChange={handleChange}
-            style={{ height: '100px', color: 'black' }}
+            style={{ color: 'black' }}
           />
         </Form.Group>
+        <Form.Group>
+          <Form.Label
+            htmlFor='generated_gemini_message'
+            style={{ color: 'black' }}
+          >
+            Generated Gemini message
+          </Form.Label>
+          <Form.Control
+            as='textarea'
+            rows={editableGeneratedText.length / 50}
+            name='generated_gemini_message'
+            onChange={handleEditableTextChange}
+            value={editableGeneratedText}
+          />
+        </Form.Group>
+
         <div>
           {gemini_message && (
             <Alert variant='info'>
               <p>Generated Gemini message:</p>
+
               <p>{generatedText}</p>
             </Alert>
           )}
