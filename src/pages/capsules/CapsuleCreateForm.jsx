@@ -11,6 +11,7 @@ import CreatEditFormFields from '../../components/CreatEditFormFields';
 import CreateEditFormImages from '../../components/CreateEditFormImages';
 import CreateEditFormVideos from '../../components/CreateEditFormVideos';
 import btnStyles from '../../styles/Button.module.css';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 function CapsuleCreateForm() {
   useRedirect('loggedOut');
@@ -92,7 +93,6 @@ function CapsuleCreateForm() {
     const response = await axiosReq.get(
       `/generate_presigned_url/?file_name=${fileName}`
     );
-    console.log('response', response.data);
     return response.data;
   };
 
