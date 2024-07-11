@@ -138,102 +138,96 @@ function CapsuleCreateForm() {
     });
   };
 
-  // const getPresignedUrl = async (fileName) => {
-  //   const response = await axiosReq.get(
-  //     `/generate_presigned_url/?file_name=${fileName}`
-  //   );
-  //   return response.data;
-  // };
+  const getPresignedUrl = async (fileName) => {
+    const response = await axiosReq.get(
+      `/generate_presigned_url/?file_name=${fileName}`
+    );
+    return response.data;
+  };
 
-  // const uploadFileToS3 = async (file, presignedUrl) => {
-  //   const formData = new FormData();
-  //   Object.keys(presignedUrl.fields).forEach((key) => {
-  //     formData.append(key, presignedUrl.fields[key]);
-  //   });
-  //   formData.append('file', file);
+  const uploadFileToS3 = async (file, presignedUrl) => {
+    const formData = new FormData();
+    Object.keys(presignedUrl.fields).forEach((key) => {
+      formData.append(key, presignedUrl.fields[key]);
+    });
+    formData.append('file', file);
 
-  //   await axios.post(presignedUrl.url, formData, {
-  //     headers: { 'Content-Type': 'multipart/form-data' },
-  //     onUploadProgress: (progressEvent) => {
-  //       const percentCompleted = Math.round(
-  //         (progressEvent.loaded * 100) / progressEvent.total
-  //       );
-  //       setUploadProgress(
-  //         (prevProgress) =>
-  //           prevProgress + percentCompleted / uploaded_videos.length
-  //       );
-  //     },
-  //   });
-  // };
+    await axios.post(presignedUrl.url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setUploadProgress(
+          (prevProgress) =>
+            prevProgress + percentCompleted / uploaded_videos.length
+        );
+      },
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploadProgress(0);
 
-    // const uploadedImageUrls = [];
-    // for (const { file } of uploaded_images) {
-    //   const presignedUrl = await getPresignedUrl(file.name);
-    //   await uploadFileToS3(file, presignedUrl);
-    //   uploadedImageUrls.push(presignedUrl.url + presignedUrl.fields.key);
-    // }
+    const uploadedImageUrls = [];
+    for (const { file } of uploaded_images) {
+      const presignedUrl = await getPresignedUrl(file.name);
+      await uploadFileToS3(file, presignedUrl);
+      uploadedImageUrls.push(presignedUrl.url + presignedUrl.fields.key);
+    }
 
-    // const uploadedVideoUrls = [];
-    // for (const { file } of uploaded_videos) {
-    //   const presignedUrl = await getPresignedUrl(file.name);
-    //   await uploadFileToS3(file, presignedUrl);
-    //   uploadedVideoUrls.push(presignedUrl.url + presignedUrl.fields.key);
-    // }
+    const uploadedVideoUrls = [];
+    for (const { file } of uploaded_videos) {
+      const presignedUrl = await getPresignedUrl(file.name);
+      await uploadFileToS3(file, presignedUrl);
+      uploadedVideoUrls.push(presignedUrl.url + presignedUrl.fields.key);
+    }
 
-    // const metadata = {
-    //   uploaded_images_metadata: uploaded_images.map(
-    //     ({ date_taken, file }, idx) => ({
-    //       url: uploadedImageUrls[idx],
-    //       date_taken: `${date_taken}T12:00:00Z`,
-    //       gemini_messages: [
-    //         { message: `Gemini message for image ${file.name}` },
-    //       ],
-    //     })
-    //   ),
-    //   uploaded_videos_metadata: uploaded_videos.map(
-    //     ({ date_taken, file }, idx) => ({
-    //       url: uploadedVideoUrls[idx],
-    //       date_taken: `${date_taken}T12:00:00Z`,
-    //       gemini_messages: [
-    //         { message: `Gemini message for video ${file.name}` },
-    //       ],
-    //     })
-    //   ),
-    // };
+    const metadata = {
+      uploaded_images_metadata: uploaded_images.map(
+        ({ date_taken, file }, idx) => ({
+          url: uploadedImageUrls[idx],
+          date_taken: `${date_taken}T12:00:00Z`,
+          gemini_messages: [
+            { message: `${editableGeneratedText} ${file.name}` },
+          ],
+        })
+      ),
+      uploaded_videos_metadata: uploaded_videos.map(
+        ({ date_taken, file }, idx) => ({
+          url: uploadedVideoUrls[idx],
+          date_taken: `${date_taken}T12:00:00Z`,
+          gemini_messages: [
+            { message: `${editableGeneratedText} ${file.name}` },
+          ],
+        })
+      ),
+    };
 
     const formData = new FormData();
     formData.append('title', title);
     formData.append('message', message);
     formData.append('release_date', release_date);
-    formData.append('gemini_message', run());
-    // formData.append(
-    //   'uploaded_images_metadata',
-    //   JSON.stringify(metadata.uploaded_images_metadata)
-    // );
-    // formData.append(
-    //   'uploaded_videos_metadata',
-    //   JSON.stringify(metadata.uploaded_videos_metadata)
-    // );
+    formData.append(
+      'uploaded_images_metadata',
+      JSON.stringify(metadata.uploaded_images_metadata)
+    );
+    formData.append(
+      'uploaded_videos_metadata',
+      JSON.stringify(metadata.uploaded_videos_metadata)
+    );
 
     try {
-      // const { data } = await axiosReq.post('/capsules/', formData, {
-      //   onUploadProgress: (progressEvent) => {
-      //     const percentCompleted = Math.round(
-      //       (progressEvent.loaded * 100) / progressEvent.total
-      //     );
-      //     setUploadProgress(percentCompleted);
-      //   },
-      // });
-      // history.push(`/capsules/${data.id}`);
-      const generatedMessage = await run();
-      setGeneratedText(generatedMessage);
-      setEditableGeneratedText(generatedMessage);
-      console.log('formData', formData.get('gemini_message'));
-      executeRun();
+      const { data } = await axiosReq.post('/capsules/', formData, {
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setUploadProgress(percentCompleted);
+        },
+      });
+      history.push(`/capsules/${data.id}`);
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -241,6 +235,13 @@ function CapsuleCreateForm() {
 
   const handleEditableTextChange = (e) => {
     setEditableGeneratedText(e.target.value);
+  };
+
+  const generateGeminiMessage = async (e) => {
+    const generatedMessage = await run();
+    setGeneratedText(generatedMessage);
+    setEditableGeneratedText(generatedMessage);
+    executeRun();
   };
 
   return (
@@ -284,16 +285,27 @@ function CapsuleCreateForm() {
           >
             Generated Gemini message
           </Form.Label>
-          <Form.Control
-            as='textarea'
-            rows={editableGeneratedText.length / 50}
-            name='generated_gemini_message'
-            onChange={handleEditableTextChange}
-            value={editableGeneratedText}
-          />
+          <Alert variant='info'>
+            <Form.Control
+              as='textarea'
+              rows={editableGeneratedText.length / 50}
+              name='generated_gemini_message'
+              onChange={handleEditableTextChange}
+              value={editableGeneratedText}
+              className={btnStyles.ButtonPrimary}
+            />
+          </Alert>
         </Form.Group>
+        <button
+          className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} btn mb-5`}
+          onClick={generateGeminiMessage}
+        >
+          {generatedText
+            ? 'Regenerate Gemini message'
+            : 'Generate Gemini message'}
+        </button>
 
-        <div>
+        {/* <div>
           {gemini_message && (
             <Alert variant='info'>
               <p>Generated Gemini message:</p>
@@ -301,7 +313,7 @@ function CapsuleCreateForm() {
               <p>{generatedText}</p>
             </Alert>
           )}
-        </div>
+        </div> */}
         {uploadProgress > 0 && (
           <div className='progress'>
             <div
