@@ -137,91 +137,91 @@ function CapsuleCreateForm() {
     });
   };
 
-  const getPresignedUrl = async (fileName, partNumber, uploadId) => {
-    const response = await axiosReq.get(
-      `/generate_presigned_url/?file_name=${fileName}&part_number=${partNumber}&upload_id=${uploadId}`
+  const createMultipartUpload = async (fileName) => {
+    const formData = new FormData();
+    formData.append('file_name', fileName);
+    const { data } = await axiosReq.post(
+      '/initiate_multipart_upload/',
+      formData
     );
-    return response.data;
+    console.log('Upload ID:', data.uploadId);
+    return data.uploadId;
   };
 
-  /*const uploadFileToS3 = async (file, presignedUrl) => {
-    const formData = new FormData();
-    Object.keys(presignedUrl.fields).forEach((key) => {
-      formData.append(key, presignedUrl.fields[key]);
-    });
-    formData.append('file', file);
-
-    await axios.post(presignedUrl.url, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-      onUploadProgress: (progressEvent) => {
-        const percentCompleted = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total
-        );
-        setUploadProgress(
-          (prevProgress) =>
-            prevProgress + percentCompleted / uploaded_videos.length
-        );
+  const getPresignedUrl = async (fileName, partNumber, uploadId) => {
+    console.log(
+      `Requesting presigned URL for part ${partNumber} of ${fileName} with uploadId ${uploadId}`
+    );
+    const { data } = await axiosReq.get('/generate_presigned_url/', {
+      params: {
+        file_name: fileName,
+        part_number: partNumber,
+        upload_id: uploadId,
       },
     });
-  };*/
-
-  const uploadPart = async (file, presignedUrl, partNumber) => {
-    const formData = new FormData();
-    Object.keys(presignedUrl.fields).forEach((key) => {
-      formData.append(key, presignedUrl.fields[key]);
-    });
-    formData.append('file', file);
-
-    const response = await axios.post(presignedUrl.url, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-      onUploadProgress: (progressEvent) => {
-        const percentCompleted = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total
-        );
-        setUploadProgress(
-          (prevProgress) =>
-            prevProgress + (percentCompleted / uploaded_videos.length)
-        );
-      },
-    });
-
-    return {
-      ETag: response.headers.etag,
-      PartNumber: partNumber,
-    };
-  };
-
-  const uploadFileInParts = async (file) => {
-    const fileSize = file.size;
-    const partSize = 5 * 1024 * 1024; // 5MB parts
-    const numberOfParts = Math.ceil(fileSize / partSize);
-
-    const { uploadId } = await getPresignedUrl(file.name, 1, null);
-
-    const parts = [];
-    for (let partNumber = 1; partNumber <= numberOfParts; partNumber++) {
-      const start = (partNumber - 1) * partSize;
-      const end = partNumber * partSize;
-      const filePart = file.slice(start, end);
-
-      const presignedUrl = await getPresignedUrl(
-        file.name,
-        partNumber,
-        uploadId
-      );
-      const part = await uploadPart(filePart, presignedUrl, partNumber);
-      parts.push(part);
-    }
-
-    await completeMultipartUpload(uploadId, parts, file.name);
+    console.log(`Received presigned URL: ${data.url}`);
+    return data.url;
   };
 
   const completeMultipartUpload = async (uploadId, parts, fileName) => {
-    await axiosReq.post('/complete_multipart_upload/', {
-      uploadId,
-      parts,
-      fileName,
+    try {
+      const response = await axiosReq.post('/complete_multipart_upload/', {
+        uploadId,
+        parts,
+        fileName,
+      });
+      console.log('Uploaded to S3:', response.data); // Handle the response as needed
+      return response.data.url; // Return the JSON response from your Django endpoint
+    } catch (error) {
+      console.error('Error completing multipart upload:', error);
+      throw error; // Handle or propagate the error
+    }
+  };
+
+  const uploadPart = async (filePart, presignedUrl) => {
+    const response = await axios.put(presignedUrl, filePart, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
+    return response.headers.etag;
+  };
+
+  const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
+
+  const uploadFileInParts = async (file, setUploadProgress) => {
+    const fileSize = file.size;
+    const fileName = file.name;
+    const numberOfParts = Math.ceil(fileSize / CHUNK_SIZE);
+
+    const uploadId = await createMultipartUpload(fileName);
+
+    console.log('Uploading file in parts:', fileName);
+    console.log('uploadId:', uploadId);
+
+    const parts = [];
+
+    for (let partNumber = 1; partNumber <= numberOfParts; partNumber++) {
+      const start = (partNumber - 1) * CHUNK_SIZE;
+      const end = partNumber * CHUNK_SIZE;
+      const filePart = file.slice(start, end);
+
+      const presignedUrl = await getPresignedUrl(
+        fileName,
+        partNumber,
+        uploadId
+      );
+      const etag = await uploadPart(filePart, presignedUrl);
+
+      parts.push({ ETag: etag, PartNumber: partNumber });
+
+      const percentCompleted = (partNumber / numberOfParts) * 100;
+      setUploadProgress(percentCompleted);
+    }
+
+    const finalUrl = await completeMultipartUpload(uploadId, parts, fileName);
+
+    return finalUrl;
   };
 
   const handleSubmit = async (e) => {
@@ -229,21 +229,38 @@ function CapsuleCreateForm() {
     setUploadProgress(0);
 
     const uploadedImageUrls = [];
+    const uploadedVideoUrls = [];
+
+    // Function to handle the upload process for each file
+    const handleFileUpload = async (file) => {
+      // Get the file name
+      const fileName = file.name;
+
+      // Create multipart upload and get upload ID
+      const uploadId = await createMultipartUpload(fileName);
+      console.log(`Upload ID for ${fileName}:`, uploadId);
+
+      // Upload file in parts
+      const finalUrl = await uploadFileInParts(
+        file,
+        setUploadProgress,
+        uploadId
+      );
+      console.log(`Final URL for ${fileName}:`, finalUrl);
+
+      return finalUrl;
+    };
+
+    // Upload images
     for (const { file } of uploaded_images) {
-      const presignedUrl = await getPresignedUrl(file.name, 1, null);
-      //const presignedUrl = await getPresignedUrl(file.name);
-      //await uploadFileToS3(file, presignedUrl);
-      await uploadFileInParts(file);
-      uploadedImageUrls.push(presignedUrl.url + presignedUrl.fields.key);
+      const finalUrl = await handleFileUpload(file);
+      uploadedImageUrls.push(finalUrl);
     }
 
-    const uploadedVideoUrls = [];
+    // Upload videos
     for (const { file } of uploaded_videos) {
-      const presignedUrl = await getPresignedUrl(file.name, 1, null);
-      //const presignedUrl = await getPresignedUrl(file.name);
-      //await uploadFileToS3(file, presignedUrl);
-      await uploadFileInParts(file);
-      uploadedVideoUrls.push(presignedUrl.url + presignedUrl.fields.key);
+      const finalUrl = await handleFileUpload(file);
+      uploadedVideoUrls.push(finalUrl);
     }
 
     const metadata = {
@@ -281,15 +298,9 @@ function CapsuleCreateForm() {
     );
 
     try {
-      const { data } = await axiosReq.post('/capsules/', formData, {
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setUploadProgress(percentCompleted);
-        },
-      });
+      const { data } = await axiosReq.post('/capsules/', formData);
       history.push(`/capsules/${data.id}`);
+      console.log('Capsule created');
     } catch (err) {
       setErrors(err.response?.data);
     }
