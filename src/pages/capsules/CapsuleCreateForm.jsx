@@ -11,7 +11,6 @@ import CreatEditFormFields from '../../components/CapsuleCreateEditForm/CreatEdi
 import CreateEditFormImages from '../../components/CapsuleCreateEditForm/CreateEditFormImages';
 import CreateEditFormVideos from '../../components/CapsuleCreateEditForm/CreateEditFormVideos';
 import btnStyles from '../../styles/Button.module.css';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 
 function CapsuleCreateForm() {
   useRedirect('loggedOut');
@@ -138,14 +137,14 @@ function CapsuleCreateForm() {
     });
   };
 
-  const getPresignedUrl = async (fileName) => {
+  const getPresignedUrl = async (fileName, partNumber, uploadId) => {
     const response = await axiosReq.get(
-      `/generate_presigned_url/?file_name=${fileName}`
+      `/generate_presigned_url/?file_name=${fileName}&part_number=${partNumber}&upload_id=${uploadId}`
     );
     return response.data;
   };
 
-  const uploadFileToS3 = async (file, presignedUrl) => {
+  /*const uploadFileToS3 = async (file, presignedUrl) => {
     const formData = new FormData();
     Object.keys(presignedUrl.fields).forEach((key) => {
       formData.append(key, presignedUrl.fields[key]);
@@ -164,6 +163,65 @@ function CapsuleCreateForm() {
         );
       },
     });
+  };*/
+
+  const uploadPart = async (file, presignedUrl, partNumber) => {
+    const formData = new FormData();
+    Object.keys(presignedUrl.fields).forEach((key) => {
+      formData.append(key, presignedUrl.fields[key]);
+    });
+    formData.append('file', file);
+
+    const response = await axios.post(presignedUrl.url, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setUploadProgress(
+          (prevProgress) =>
+            prevProgress + (percentCompleted / uploaded_videos.length)
+        );
+      },
+    });
+
+    return {
+      ETag: response.headers.etag,
+      PartNumber: partNumber,
+    };
+  };
+
+  const uploadFileInParts = async (file) => {
+    const fileSize = file.size;
+    const partSize = 5 * 1024 * 1024; // 5MB parts
+    const numberOfParts = Math.ceil(fileSize / partSize);
+
+    const { uploadId } = await getPresignedUrl(file.name, 1, null);
+
+    const parts = [];
+    for (let partNumber = 1; partNumber <= numberOfParts; partNumber++) {
+      const start = (partNumber - 1) * partSize;
+      const end = partNumber * partSize;
+      const filePart = file.slice(start, end);
+
+      const presignedUrl = await getPresignedUrl(
+        file.name,
+        partNumber,
+        uploadId
+      );
+      const part = await uploadPart(filePart, presignedUrl, partNumber);
+      parts.push(part);
+    }
+
+    await completeMultipartUpload(uploadId, parts, file.name);
+  };
+
+  const completeMultipartUpload = async (uploadId, parts, fileName) => {
+    await axiosReq.post('/complete_multipart_upload/', {
+      uploadId,
+      parts,
+      fileName,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -172,15 +230,19 @@ function CapsuleCreateForm() {
 
     const uploadedImageUrls = [];
     for (const { file } of uploaded_images) {
-      const presignedUrl = await getPresignedUrl(file.name);
-      await uploadFileToS3(file, presignedUrl);
+      const presignedUrl = await getPresignedUrl(file.name, 1, null);
+      //const presignedUrl = await getPresignedUrl(file.name);
+      //await uploadFileToS3(file, presignedUrl);
+      await uploadFileInParts(file);
       uploadedImageUrls.push(presignedUrl.url + presignedUrl.fields.key);
     }
 
     const uploadedVideoUrls = [];
     for (const { file } of uploaded_videos) {
-      const presignedUrl = await getPresignedUrl(file.name);
-      await uploadFileToS3(file, presignedUrl);
+      const presignedUrl = await getPresignedUrl(file.name, 1, null);
+      //const presignedUrl = await getPresignedUrl(file.name);
+      //await uploadFileToS3(file, presignedUrl);
+      await uploadFileInParts(file);
       uploadedVideoUrls.push(presignedUrl.url + presignedUrl.fields.key);
     }
 
