@@ -1,16 +1,31 @@
 .Container {
-    margin-top: 110px;
-    min-height: 343px;
-  }
+  margin-top: 110px;
+  min-height: 343px;
+}
+
+.capsuleForm {
+  background-color: #FAF9F6;
+  border: 3px ridge #00cccc;
+  border-radius: 10px;
+  color: #030003;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+}
   
-  .Image {
-    max-height: 15vh;
-    max-width: 100%;
-    object-fit: contain;
-    margin: 2px 5px;
-  }
+.Image {
+  max-height: 15vh;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 2px 5px;
+}
   
-  .ImageUpload:hover {
-    cursor: pointer;
-  }
+.ImageUpload:hover {
+  cursor: pointer;
+}
+
+.generatedMessage {
+  border: 2px ridge #00cccc;
+  border-radius: 10px;
+  padding: 1rem;
+}
   
