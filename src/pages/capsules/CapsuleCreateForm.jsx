@@ -4,13 +4,15 @@ import { axiosReq } from '../../api/axiosDefaults';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+//import Container from 'react-bootstrap/Container';
+//import Row from 'react-bootstrap/Row';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useRedirect } from '../../hooks/useRedirect';
 import CreatEditFormFields from '../../components/CapsuleCreateEditForm/CreatEditFormFields';
 import CreateEditFormImages from '../../components/CapsuleCreateEditForm/CreateEditFormImages';
 import CreateEditFormVideos from '../../components/CapsuleCreateEditForm/CreateEditFormVideos';
 import btnStyles from '../../styles/Button.module.css';
+import styles from '../../styles/CapsuleCreateForm.module.css';
 
 function CapsuleCreateForm() {
   useRedirect('loggedOut');
@@ -181,7 +183,7 @@ function CapsuleCreateForm() {
   const uploadPart = async (filePart, presignedUrl) => {
     const response = await axios.put(presignedUrl, filePart, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/octet-stream',
       },
     });
     return response.headers.etag;
@@ -318,96 +320,103 @@ function CapsuleCreateForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Container>
-        <CreatEditFormFields
-          capsuleData={capsuleData}
-          errors={errors}
-          handleChange={handleChange}
-        />
-        <CreateEditFormImages
-          capsuleData={capsuleData}
-          errors={errors}
-          handleChangeImage={handleChangeImage}
-          imageInput={imageInput}
-          handleDateChange={handleDateChange}
-        />
-        <CreateEditFormVideos
-          capsuleData={capsuleData}
-          errors={errors}
-          handleChangeVideo={handleChangeVideo}
-          videoInput={videoInput}
-          handleDateChange={handleDateChange}
-        />
-        <Form.Group>
-          <Form.Label htmlFor='release_date' style={{ color: 'black' }}>
-            Gemini message input
-          </Form.Label>
-          <Form.Control
-            type='text'
-            name='gemini_message'
-            value={capsuleData.gemini_message}
-            onChange={handleChange}
-            style={{ color: 'black' }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label
-            htmlFor='generated_gemini_message'
-            style={{ color: 'black' }}
-          >
-            Generated Gemini message
-          </Form.Label>
-          <Alert variant='info'>
-            <Form.Control
-              as='textarea'
-              rows={editableGeneratedText.length / 50}
-              name='generated_gemini_message'
-              onChange={handleEditableTextChange}
-              value={editableGeneratedText}
-              className={btnStyles.ButtonPrimary}
-            />
-          </Alert>
-        </Form.Group>
-        <button
-          className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} btn mb-5`}
-          onClick={generateGeminiMessage}
-        >
-          {generatedText
-            ? 'Regenerate Gemini message'
-            : 'Generate Gemini message'}
-        </button>
-
-        {/* <div>
-          {gemini_message && (
-            <Alert variant='info'>
-              <p>Generated Gemini message:</p>
-
-              <p>{generatedText}</p>
-            </Alert>
-          )}
-        </div> */}
-        {uploadProgress > 0 && (
-          <div className='progress'>
-            <div
-              className='progress-bar'
-              role='progressbar'
-              style={{ width: `${uploadProgress}%` }}
-              aria-valuenow={uploadProgress}
-              aria-valuemin='0'
-              aria-valuemax='100'
-            >
-              {uploadProgress}%
-            </div>
-          </div>
-        )}
+    <Form className="mx-auto p-2" md={8} lg={6} onSubmit={handleSubmit}>
+      <h1>Create a Capsule</h1>
+      <Container className={styles.capsuleForm}>
         <Row>
-          <button
-            className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} mx-auto btn mb-5`}
-            type='submit'
-          >
-            Create Capsule
-          </button>
+          <Col className="mx-auto" md={6}>
+            <CreatEditFormFields
+              capsuleData={capsuleData}
+              errors={errors}
+              handleChange={handleChange}
+            />
+            <CreateEditFormImages
+              capsuleData={capsuleData}
+              errors={errors}
+              handleChangeImage={handleChangeImage}
+              imageInput={imageInput}
+              handleDateChange={handleDateChange}
+            />
+            <CreateEditFormVideos
+              capsuleData={capsuleData}
+              errors={errors}
+              handleChangeVideo={handleChangeVideo}
+              videoInput={videoInput}
+              handleDateChange={handleDateChange}
+            />
+            <Form.Group>
+              <Form.Label htmlFor='release_date' className={styles.formLabel}>
+                Gemini message input
+              </Form.Label>
+              <Form.Control
+                type='text'
+                name='gemini_message'
+                value={capsuleData.gemini_message}
+                onChange={handleChange}
+                style={{ color: 'black' }}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label
+                htmlFor='generated_gemini_message'
+                style={{ color: 'black' }}
+              >
+                Generated Gemini message
+              </Form.Label>
+              <Alert variant='info'>
+                <Form.Control
+                  as='textarea'
+                  rows={editableGeneratedText.length / 50}
+                  name='generated_gemini_message'
+                  onChange={handleEditableTextChange}
+                  value={editableGeneratedText}
+                  className={styles.generatedMessage}
+                />
+              </Alert>
+            </Form.Group>
+            <div className='text-center mx-auto w-50'>
+              <button
+                className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} btn mb-5`}
+                onClick={generateGeminiMessage}
+              >
+                {generatedText
+                  ? 'Regenerate Gemini message'
+                  : 'Generate Gemini message'}
+              </button>
+            </div>
+
+            {/* <div>
+              {gemini_message && (
+                <Alert variant='info'>
+                  <p>Generated Gemini message:</p>
+
+                  <p>{generatedText}</p>
+                </Alert>
+              )}
+            </div> */}
+            {uploadProgress > 0 && (
+              <div className='progress'>
+                <div
+                  className='progress-bar'
+                  role='progressbar'
+                  style={{ width: `${uploadProgress}%` }}
+                  aria-valuenow={uploadProgress}
+                  aria-valuemin='0'
+                  aria-valuemax='100'
+                >
+                  {uploadProgress}%
+                </div>
+              </div>
+            )}
+            <Row className='mx-auto w-50'>
+              <button
+                className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} mx-auto btn mb-5`}
+                type='submit'
+              >
+                Create Capsule
+              </button>
+            </Row>
+          </Col>
         </Row>
       </Container>
     </Form>
