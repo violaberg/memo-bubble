@@ -101,7 +101,7 @@ function App() {
           </Switch>
 
         </Container>
-        <Footer />
+        {path === "/capsules" || path === "/capsules/create" ? null : <Footer />}
         <Container />
         <>
           <CookieConsent
