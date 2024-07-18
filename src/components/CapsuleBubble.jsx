@@ -5,42 +5,56 @@ import GeminiMessages from './GeminiMessages';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { axiosRes } from '../api/axiosDefaults';
+import { MoreDropdown } from '../components/MoreDropDown';
 
 const Capsule = ({ ...props }) => {
   const history = useHistory();
 
   // Destructure the props
-  const { id, title, message, created_on, updated_on, images, videos } = props;
+  const {
+    id,
+    title,
+    message,
+    created_on,
+    updated_on,
+    images,
+    videos,
+    is_owner,
+  } = props;
+
+  console.log('is_owner', is_owner);
 
   // Create an array of images
   const imagesArray = images?.map((image) => image);
 
   const videosArray = videos?.map((video) => video);
 
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/capsules/${id}/`);
+      history.push('/capsules');
+    } catch (err) {
+      // console.log(err);
+    }
+  };
+
+  const handleEdit = () => {
+    history.push(`/capsules/${id}/edit`);
+  };
+
   // console.log('imagesArray', imagesArray);
 
   // console.log('videosArray', videosArray);
 
-  const { GoogleGenerativeAI } = require('@google/generative-ai');
-
-  // Access your API key as an environment variable (see "Set up your API key" above)
-  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-
-  async function run() {
-    // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-
-    const prompt = 'Write a story about a magic backpack.';
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    console.log(text);
-  }
-
   return (
     <Container>
       <Row className={styles.capsule}>
+        <div className='d-flex'>
+          {is_owner && (
+            <MoreDropdown handleDelete={handleDelete} handleEdit={handleEdit} />
+          )}
+        </div>
         <h1>{title}</h1>
         <p>{message}</p>
         <p>
@@ -49,6 +63,8 @@ const Capsule = ({ ...props }) => {
         <p>
           <strong>Updated On: {updated_on}</strong>
         </p>
+      </Row>
+      <Row className={styles.capsule}>
         <Col>
           <h2>Images</h2>
           {imagesArray?.map((image, id) => (
