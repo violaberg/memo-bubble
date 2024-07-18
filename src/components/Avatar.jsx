@@ -4,7 +4,7 @@ import placeholderImage from "../assets/placeholder.png";
 
 const Avatar = ({ src, height = 25, text }) => {
 
-  const avatarSrc = src ? src : placeholderImage;
+  const avatarSrc = src === null ? src : placeholderImage;
 
   return (
     <span>
