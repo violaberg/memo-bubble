@@ -8,13 +8,15 @@ import Bubbles from './Bubbles';
 const CapsulePage = () => {
   const { capsules, setCapsules, loaded, pathname } = useFetchCapsules();
 
-  const dataResults = capsules || [];
   //   console.log('capsules', dataResults)
 
   return (
     <div className={styles.capsulePage}>
-      <h1>Bubbles</h1>
-      <Bubbles dataResults={dataResults} hasLoaded={loaded} />
+      <Bubbles
+        capsules={capsules}
+        hasLoaded={loaded}
+        setCapsules={setCapsules}
+      />
     </div>
   );
 };
