@@ -3,8 +3,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: #F0F8FF;
-  font-family: "Exo 2", sans-serif;
+  color: #030003;
+  font-family: 'Exo 2', sans-serif;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -21,7 +21,7 @@
 }
 
 .Content {
-  background-color: #FAF9F6;
+  background-color: #faf9f6;
   padding: 10px;
   border: 3px ridge #00cccc;
   border-radius: 10px;
@@ -54,17 +54,20 @@ a:hover {
   color: #545400;
 }
 
-h1, h2, h3 {
-  font-family: "Orbitron", sans-serif;
+h1,
+h2,
+h3 {
+  font-family: 'Orbitron', sans-serif;
   text-align: center;
 }
- 
+
 h1 {
   color: #808000;
   padding: 0.5rem 0;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: #009393;
 }
 
@@ -72,7 +75,7 @@ p {
   color: #f0f8ff;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 
@@ -91,7 +94,7 @@ figure {
   width: 5px;
 }
 *::-webkit-scrollbar-track {
-  background: #F0F8FF;
+  background: #f0f8ff;
 }
 *::-webkit-scrollbar-thumb {
   background: #99ffff;
@@ -105,7 +108,7 @@ figure {
 .CookieBannerContent {
   font-size: 11px;
   margin-bottom: 1rem;
-  color: #F0F8FF;
+  color: #f0f8ff;
 }
 
 .CookieBannerButtonWrapper {
@@ -120,7 +123,7 @@ figure {
   bottom: 10px;
   right: 10px;
   font-size: 1.5rem;
-  border: 2px ridge #00CCCC;
+  border: 2px ridge #00cccc;
   padding: 2px 5px;
   z-index: 900;
   cursor: pointer;
@@ -128,7 +131,7 @@ figure {
 
 .CookieReset:hover {
   background-color: #555;
-  color: #F0F8FF;
+  color: #f0f8ff;
 }
 
 /* Responsive */
