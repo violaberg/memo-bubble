@@ -34,10 +34,6 @@
   }
 }
 
-.BubblesContainer {
-  padding: 1rem;
-}
-
 .BubbleImage {
   border: 1px ridge #00cccc;
   border-radius: 10px;
