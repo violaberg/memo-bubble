@@ -1,10 +1,9 @@
-import React from "react";
-import styles from "../styles/Avatar.module.css";
-import placeholderImage from "../assets/placeholder.png";
+import React from 'react';
+import styles from '../styles/Avatar.module.css';
+import placeholderImage from '../assets/placeholder.png';
 
 const Avatar = ({ src, height = 25, text }) => {
-
-  const avatarSrc = src === null ? src : placeholderImage;
+  const avatarSrc = src === null ? placeholderImage : src;
 
   return (
     <span>
@@ -13,7 +12,7 @@ const Avatar = ({ src, height = 25, text }) => {
         src={avatarSrc}
         height={height}
         width={height}
-        alt="avatar"
+        alt='avatar'
       />
       {text}
     </span>
