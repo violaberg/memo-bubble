@@ -1,8 +1,9 @@
 .App {
+  background-attachment: fixed;
   background-image: url(assets/pastel-canvas.jpg);
-  background-position: center;
-  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
+  background-size: cover;
   color: #030003;
   font-family: 'Exo 2', sans-serif;
   min-height: 100vh;
