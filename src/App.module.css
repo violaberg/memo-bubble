@@ -1,8 +1,8 @@
 .App {
-  background-image: url(assets/abstract-blur-background.jpg);
+  background-image: url(assets/pastel-canvas.jpg);
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
+  background-repeat: no-repeat;
   color: #030003;
   font-family: 'Exo 2', sans-serif;
   min-height: 100vh;
