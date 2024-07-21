@@ -55,71 +55,75 @@ function SignInForm() {
   };
 
   return (
-    <Row className={styles.Row}>
-      <Col className='my-auto p-0 p-md-2' md={6}>
-        <Container className={`${appStyles.Content} p-4 `}>
-          <h1 className={styles.Header}>Sign in</h1>
-          <Form onSubmit={handleSubmit} className='m-auto'>
-            <Form.Group controlId='username'>
-              <Form.Label className='d-none'>username</Form.Label>
-              <Form.Control
-                className={styles.Input}
-                type='text'
-                placeholder='Username'
-                name='username'
-                value={username}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            {errors.username?.map((message, idx) => (
-              <Alert variant='warning' key={idx}>
-                {message}
-              </Alert>
-            ))}
+    <Container className='py-3'>
+      <Row className={`${styles.SignInUpForm} mx-auto m-4`}>
+        <Col className='my-auto p-0 p-md-2' md={6}>
+          <Container className={`${styles.FormContent} text-center`}>
+            <h1 className={styles.Header}>Sign in</h1>
 
-            <Form.Group controlId='password'>
-              <Form.Label className='d-none'>Password</Form.Label>
-              <Form.Control
-                className={styles.Input}
-                type='password'
-                placeholder='Password'
-                name='password'
-                value={password}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            {errors.password?.map((message, idx) => (
-              <Alert variant='warning' key={idx}>
-                {message}
-              </Alert>
-            ))}
+            <Form onSubmit={handleSubmit} className='m-auto'>
+              <Form.Group controlId='username'>
+                <Form.Label className='d-none'>username</Form.Label>
+                <Form.Control
+                  className={`${styles.Input} mx-auto shadow`}
+                  type='text'
+                  placeholder='Username'
+                  name='username'
+                  value={username}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              {errors.username?.map((message, idx) => (
+                <Alert variant='warning' key={idx}>
+                  {message}
+                </Alert>
+              ))}
 
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.ButtonSecondary}`}
-              type='submit'
-            >
-              Sign In
-            </Button>
-            {errors.non_field_errors?.map((message, idx) => (
-              <Alert variant='warning' key={idx} className='mt-3'>
-                {message}
-              </Alert>
-            ))}
-          </Form>
-        </Container>
-        <Container className={`mt-3 ${appStyles.Content}`}>
-          <Link className={styles.Link} to='/signup'>
-            Don't have an account? <span>Sign up now!</span>
-          </Link>
-        </Container>
-      </Col>
-      <Col
-        md={6}
-        className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
-      >
-        <Image className={`${appStyles.FillerImage}`} src={sigIn} alt='' />
-      </Col>
-    </Row>
+              <Form.Group controlId='password'>
+                <Form.Label className='d-none'>Password</Form.Label>
+                <Form.Control
+                  className={`${styles.Input} mx-auto shadow`}
+                  type='password'
+                  placeholder='Password'
+                  name='password'
+                  value={password}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              {errors.password?.map((message, idx) => (
+                <Alert variant='warning' key={idx}>
+                  {message}
+                </Alert>
+              ))}
+
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow`}
+                type='submit'
+              >
+                Sign In
+              </Button>
+              {errors.non_field_errors?.map((message, idx) => (
+                <Alert variant='warning' key={idx} className='mt-3'>
+                  {message}
+                </Alert>
+              ))}
+            </Form>
+          </Container>
+
+          <Container className={`shadow my-3 w-75 ${appStyles.Content}`}>
+            <Link className={styles.Link} to='/signup'>
+              Don't have an account?<br></br> <span>Sign up now!</span>
+            </Link>
+          </Container>
+        </Col>
+        <Col
+          md={6}
+          className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
+        >
+          <Image className={`${styles.FillerImage} mt-2 shadow`} src={sigIn} alt='Colourful neon bubbles' />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
