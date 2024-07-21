@@ -32,7 +32,7 @@
 
 .SignInUpForm {
   background: #FAF9F6;
-  border: 2px ridge #00cccc;
+  border: 3px ridge #00cccc;
   border-radius: 10px;
   max-width: 720px;
 }
@@ -43,6 +43,13 @@
 
 .SignUpCol {
   height: 375px;
+}
+
+.SignInUpLink {
+  background-color: #faf9f6;
+  padding: 10px;
+  border: 2px ridge #00cccc;
+  border-radius: 10px;
 }
 
 .FillerImage {
