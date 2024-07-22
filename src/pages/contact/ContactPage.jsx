@@ -20,15 +20,19 @@ const ContactPage = () => {
     <>
       <Helmet>
         <title>{ContactPage.title}</title>
-        <meta name="description" content="Contact us to learn more about our real estate advisory services and how we can assist you in achieving your real estate goals." />
-        <meta name="keywords" content="acropolis estates, real estate advisory, real estate guidance, strategic advice, real estate investments, market analysis, property values, investment opportunities, financial planning, budgeting, cash flow analysis, risk assessment, market volatility, regulatory changes, property inspections, title searches, environmental assessments, due diligence, portfolio optimization, investment diversification, tax planning, tax-efficient investment, financing assistance, real estate financing, debt financing, exit strategies, real estate selling, refinancing, repositioning properties, regulatory compliance, zoning laws, building codes, landlord-tenant regulations, environmental regulations, client education, market updates, industry insights" />
+        <meta name="description" content="Contact us for any inquiries, support, or feedback. We're here to assist you with all your needs. Fill out our contact form or reach us via email or phone. We value your input and look forward to connecting with you." />
+        <meta name="keywords" content="contact, support, inquiries, feedback, customer service, help, assistance, email, form, reach out, connect" />
       </Helmet>
       <Container fluid className={`${styles.ContactPageContainer}`}>
-        <Row className={`${styles.HeroImageCon}`}>
+        <Row>
           <Col md={10} lg={8} className={`${styles.ContactPageContent} text-center`}>
-            <p>{ContactPage.p1}</p>
+            <h1>Contact Us</h1>
+            <p>
+            We value your feedback and inquiries. Whether you have questions about our services or want to share your suggestions, we're here for it.
+            Please fill out the form below with your contact information and message, and a member of our team will get back to you as soon as possible. We look forward to hearing from you and assisting you with anything we can. Thank you for choosing <strong className={styles.brandName}>MEMO BUBBLE</strong>!
+            </p>
           </Col>
-          <Col sm={12} className={`${styles.ContactFormCol}`}>
+          <Col sm={12} md={8} lg={6} className={`${styles.ContactFormCol} mx-auto`}>
             <ContactForm />
           </Col>
         </Row>

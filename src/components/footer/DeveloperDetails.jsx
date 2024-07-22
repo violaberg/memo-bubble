@@ -6,7 +6,7 @@ import styles from "../../styles/Footer.module.css";
 const DeveloperDetails = () => {
     return (
         <div className={styles.developerDetails}>
-        <h3 className={styles.footerHeader}>Developed by:</h3>
+        <h3 className={styles.footerHeader}>Developed by</h3>
         <p>
         <span>Viola Bergere</span><br></br>
             <a href="https://github.com/violaberg" target="_blank" rel="noopener noreferrer">

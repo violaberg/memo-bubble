@@ -53,17 +53,17 @@ function ContactForm({ listing_id }) {
   const [isChecked, setIsChecked] = useState(false);
   const history = useHistory();
 
-  const message_form = `${("contactForm.listingMessage")}${listing_id}`;
+  //const message_form = `${("contactForm.listingMessage")}${listing_id}`;
   const path = useLocation().pathname;
 
   const [phoneValue, setPhoneValue] = useState();
 
-  const listingPagePath = path === `/listings/${listing_id}`;
+  //const listingPagePath = path === `/listings/${listing_id}`;
 
-  contactData.message =
-    listingPagePath && !messageDeleted
-      ? message_form
-      : contactData.message;
+  //contactData.message =
+  //  listingPagePath && !messageDeleted
+  //    ? message_form
+  //    : contactData.message;
 
 
   const handleChange = (e) => {
@@ -107,13 +107,9 @@ function ContactForm({ listing_id }) {
 
   return (
     <Row>
-      <Col className="m-auto"
-        md={listingPagePath ? 12 : 8}
-        lg={listingPagePath ? 12 : 6}
-        xl={listingPagePath ? 12 : 4}
-      >
+      <Col className='mx-auto'>
         <Container className={`${appStyles.Content} p-3 p-md-4 rounded shadow`}>
-          <h1 className={styles.Header}>{ContactForm.title}</h1>
+          <h1 className={styles.Header}>Contact Form</h1>
           <Form
             onSubmit={handleSubmit}
             className={`d-flex flex-column ${styles.ContactForm}`}
@@ -127,9 +123,9 @@ function ContactForm({ listing_id }) {
                 ))}</span>
               </Form.Label>
               <Form.Control
-                className={`${styles.Input} text-start`}
+                className={`${styles.Input} shadow text-start`}
                 type="text"
-                placeholder={ContactForm.namePlaceholder}
+                placeholder="First Name"
                 name="first_name"
                 value={first_name}
                 onChange={handleChange}
@@ -147,9 +143,9 @@ function ContactForm({ listing_id }) {
                 ))}</span>
               </Form.Label>
               <Form.Control
-                className={`${styles.Input} text-start`}
+                className={`${styles.Input} shadow text-start`}
                 type="text"
-                placeholder={ContactForm.lastNamePlaceholder}
+                placeholder="Last Name"
                 name="last_name"
                 value={last_name}
                 onChange={handleChange}
@@ -167,9 +163,9 @@ function ContactForm({ listing_id }) {
                 ))}</span>
               </Form.Label>
               <Form.Control
-                className={`${styles.Input} text-start`}
+                className={`${styles.Input} shadow text-start`}
                 type="email"
-                placeholder={ContactForm.emailPlaceholder}
+                placeholder="Your Email"
                 name="email"
                 value={email}
                 onChange={handleChange}
@@ -185,9 +181,9 @@ function ContactForm({ listing_id }) {
               ))}</span></Form.Label>
               <PhoneInput
                 style={{ paddingLeft: "0.5rem" }}
-                className={`${styles.Input} text-start`}
+                className={`${styles.Input} shadow text-start`}
                 international
-                defaultCountry="GR"
+                defaultCountry="IE"
                 placeholder="Enter phone number"
                 value={phoneValue}
                 onChange={setPhoneValue}
@@ -206,9 +202,9 @@ function ContactForm({ listing_id }) {
                 ))}</span>
               </Form.Label>
               <Form.Control
-                className={`${styles.Input} text-start`}
+                className={`${styles.Input} shadow text-start`}
                 type="text"
-                placeholder={ContactForm.subject}
+                placeholder="Subject"
                 name="subject"
                 value={subject}
                 onChange={handleChange}
@@ -226,14 +222,15 @@ function ContactForm({ listing_id }) {
                 ))}</span>
               </Form.Label>
               <Form.Control
-                className={`${styles.Input} text-start`}
+                className={`${styles.Input} shadow text-start`}
                 as="textarea"
                 rows={6}
-                placeholder={
-                  listingPagePath && !messageDeleted
-                    ? message_form
-                    : ContactForm.messagePlaceholder
-                }
+                placeholder="Your Message"
+                //placeholder={
+                //  listingPagePath && !messageDeleted
+                //    ? message_form
+                //    : ContactForm.messagePlaceholder
+                //}
                 name="message"
                 value={message}
                 onChange={handleChange}
@@ -264,9 +261,9 @@ function ContactForm({ listing_id }) {
             </Form.Group>
 
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Black} mt-3`}
+              className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow mt-3`}
               type="submit"
-            >
+            >Send
               {ContactForm.btnSend}
             </Button>
             {success && (

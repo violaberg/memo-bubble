@@ -81,12 +81,10 @@ function App() {
               render={() => <UserPasswordForm />}
             />
             <Route exact path="/forbidden" render={() => <Forbidden403 />} />
-            <Route exact path="/notfound" render={() => <NotFound />} />
-            <Route render={() => <NotFound />} />
             <Route exact path="/privacyPolicy" render={() => <PrivacyPolicy />} />
             <Route exact path="/terms" render={() => <Terms />} />
             <Route exact path="/faq" render={() => <FAQ />} />
-            <Route exact path="/contact" render={() => <ContactPage />} />
+            <Route exact path="/contact/" render={() => <ContactPage />} />
             <Route
               exact
               path="/contact_list"
@@ -97,6 +95,8 @@ function App() {
               path="/contact_list/:id"
               render={() => <ContactMessage />}
             />
+            <Route exact path="/notfound" render={() => <NotFound />} />
+            <Route render={() => <NotFound />} />
 
           </Switch>
 
