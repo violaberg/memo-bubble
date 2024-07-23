@@ -1,11 +1,11 @@
 .HeaderContainer {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    height: 100vh;
-    min-width: 100%;
-    padding-top: 550px;
-  }
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+  min-width: 100%;
+  padding-top: 550px;
+}
   
 .Header {
   font-size: 4.5rem;
@@ -33,6 +33,15 @@
 
 .ContactPageContent {
   margin: 2rem auto;
+}
+
+/* FAQ page */
+.FaqContainer {
+  background: #FAF9F6;
+  border: 3px ridge #00cccc;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 /* Additional media queries for landscape orientation on mobile devices */
