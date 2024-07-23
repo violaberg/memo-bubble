@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Col, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import styles from '../../styles/ErrorPages.module.css';
+import styles from '../../styles/ServicesPages.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import BubbleGame from '../../components/BubbleGame';
 
