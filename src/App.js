@@ -20,8 +20,8 @@ import Forbidden403 from "./pages/errors/Forbidden403";
 import Footer from './components/footer/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
-import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
-import Terms from "./pages/legal/Terms";
+import PrivacyPolicyPage from "./pages/legal/PrivacyPolicy";
+import TermsPage from "./pages/legal/Terms";
 import FAQ from "./pages/legal/FAQ";
 import ContactMessagesList from "./pages/contact/ContacMessagesList";
 import ContactMessage from "./pages/contact/ContactMessage";
@@ -42,8 +42,8 @@ function App() {
   }
 
   if (
-    path === "/privacyPolicy" ||
-    path === "/terms" ||
+    path === "/privacyPolicy/" ||
+    path === "/terms/" ||
     path === "/faq/"
   ) {
     styles.Main = styles.MainHome;
@@ -81,8 +81,8 @@ function App() {
               render={() => <UserPasswordForm />}
             />
             <Route exact path="/forbidden" render={() => <Forbidden403 />} />
-            <Route exact path="/privacyPolicy" render={() => <PrivacyPolicy />} />
-            <Route exact path="/terms" render={() => <Terms />} />
+            <Route exact path="/privacyPolicy" render={() => <PrivacyPolicyPage />} />
+            <Route exact path="/terms" render={() => <TermsPage />} />
             <Route exact path="/faq" render={() => <FAQ />} />
             <Route exact path="/contact/" render={() => <ContactPage />} />
             <Route

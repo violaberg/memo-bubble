@@ -22,12 +22,12 @@ const Footer = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <p className={styles.gemini}>
+                        <div className={styles.gemini}>
                         Supported by <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer"><span className={styles.GradientText}>Gemini</span></a>
-                        </p>
-                        <p className={styles.copyRight}>
+                        </div>
+                        <div className={styles.copyRight}>
                             &copy; 2024 All rights reserved <span className={styles.brandName}>MEMO BUBBLE</span>
-                        </p>
+                        </div>
                     </Col>
                 </Row>
             </Container>

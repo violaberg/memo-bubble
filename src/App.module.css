@@ -79,7 +79,11 @@ h3 {
 }
 
 p {
-  color: #f0f8ff;
+  text-align: justify;
+}
+
+li {
+  list-style-type: circle;
 }
 
 input[type='file'] {
