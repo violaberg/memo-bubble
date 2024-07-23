@@ -37,7 +37,8 @@
 
 /* FAQ & Terms page */
 .FaqContainer,
-.TermsContainer {
+.TermsContainer,
+.PolicyContainer {
   background: #FAF9F6;
   border: 3px ridge #00cccc;
   border-radius: 10px;
