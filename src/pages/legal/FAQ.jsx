@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Col, Row } from 'react-bootstrap';
+import styles from '../../styles/ServicesPages.module.css';
 
 const FAQPage = () => {
     const faqs = [
@@ -47,12 +48,14 @@ const FAQPage = () => {
             <Row className="my-3 flex-column">
                 <Col className="mx-auto" md={10}>
                 <p className="pb-3">Welcome to our FAQ section! Here you will find answers to the most commonly asked questions about our services. We aim to provide clear and concise information to help you better understand our offerings and resolve any queries you may have. If you need further assistance, please do not hesitate to contact us directly.</p>
-                {faqs.map((faq, index) => (
-                    <div key={index}>
-                        <h2 style={{ fontSize: "20px" }}>{faq.question}</h2>
-                        <p>{faq.answer}</p>
-                    </div>
-                ))}
+                <div className={styles.FaqContainer}>
+                    {faqs.map((faq, index) => (
+                        <div key={index}>
+                            <h2 style={{ fontSize: "20px" }}>{faq.question}</h2>
+                            <p>{faq.answer}</p>
+                        </div>
+                    ))}
+                </div>
                 </Col>
             </Row>
         </Container>

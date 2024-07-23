@@ -35,8 +35,9 @@
   margin: 2rem auto;
 }
 
-/* FAQ page */
-.FaqContainer {
+/* FAQ & Terms page */
+.FaqContainer,
+.TermsContainer {
   background: #FAF9F6;
   border: 3px ridge #00cccc;
   border-radius: 10px;

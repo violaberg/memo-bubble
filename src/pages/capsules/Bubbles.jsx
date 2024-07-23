@@ -60,15 +60,15 @@ const Bubbles = ({ capsules, setCapsules, hasLoaded }) => {
                           <h2 className={bubbleStyles.BubbleTitle}>
                             {capsule.title}
                           </h2>
-                          <p className={bubbleStyles.BubbleOwner}>
+                          <div className={bubbleStyles.BubbleOwner}>
                             Owner: <strong>{capsule.owner}</strong>
-                          </p>
-                          <p className={bubbleStyles.BubbleLocation}>
+                          </div>
+                          <div className={bubbleStyles.BubbleLocation}>
                             Location: {capsule.location}
-                          </p>
-                          <p className={bubbleStyles.BubbleDate}>
+                          </div>
+                          <div className={bubbleStyles.BubbleDate}>
                             Created on:<br></br><strong>{capsule.created_on}</strong>
-                          </p>
+                          </div>
                           </Link>
                         </Card>
                   </Col>
