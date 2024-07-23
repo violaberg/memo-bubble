@@ -73,7 +73,7 @@ const BubbleGame = () => {
             <Card className={`${bubbleStyles.Bubble} mx-auto mt-5`}>
             <strong className={`${styles.startGame} m-auto text-uppercase`} style={{ fontSize: "20px" }}>Start Game</strong>
             </Card>
-        </div>
+            </div>
       )}
     </div>
   );
