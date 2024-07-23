@@ -7,7 +7,7 @@ const LegalLinks = () => {
       <h3 className={styles.footerHeader}>Legal</h3>
       <ul>
         <li>
-          <a href="/privacy">Privacy Policy</a>
+          <a href="/privacyPolicy">Privacy Policy</a>
         </li>
         <li>
           <a href="/terms">Terms of Service</a>
