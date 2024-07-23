@@ -1,9 +1,7 @@
 //import React, { useEffect } from "react";
 import ContactForm from "./ContactForm";
 import styles from "../../styles/ServicesPages.module.css";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Container, Col, Row } from 'react-bootstrap';
 //import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 
