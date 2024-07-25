@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
+import { Container, Col, Row } from 'react-bootstrap';
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
+import styles from "../../styles/ProfilePage.module.css";
+import appStyles from "../../App.module.css";
 
 import { useParams } from "react-router";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -58,40 +58,40 @@ function ProfilePage() {
   return (
     <>
       {currentUser && (
-        <Container className="mt-5 pt-5">
+        <Container className="my-3 pt-2">
           <Row>
-            <Col className="my-2">
-              <Card className="my-2">
-                <Card.Header>
+            <Col className="my-2 mx-auto col-lg-10">
+            <h1 className="pt-2">{profileData.first_name}'s Profile Page</h1>
+              <Card className={`${appStyles.Content} my-2 shadow`}>
                   <>
                     {profileData?.owner && (
                       <ProfileEditDropdown id={profileData.id} />
                     )}
                   </>
-                  <h1>{profileData.owner}'s Profile Page</h1>
-                </Card.Header>
                 <Card.Body>
                   <Row>
-                    <Col md={4}>
+                    <Col className="text-center pt-4 mx-auto" md={4}>
                       <Image
+                        className={`${styles.ProfileImg} w-75 shadow`}
                         src={profileData.image}
                         alt={profileData.owner}
-                        rounded
                         fluid
                       />
                     </Col>
                     <Col md={8}>
                       <Card.Title>
-                        {profileData.first_name} {profileData.last_name}
+                        <h2 className="pt-4" style={{fontSize: "20px"}}>{profileData.first_name} {profileData.last_name}</h2>
                       </Card.Title>
                       <Card.Text>
-                        Email: {profileData.email_address}
+                        <label>Username:</label> {profileData.owner}
                         <br />
-                        Phone: {profileData.phone}
+                        <label>Email:</label> {profileData.email_address}
                         <br />
-                        Joined at: {profileData.created_at}
+                        <label>Phone:</label> {profileData.phone}
                         <br />
-                        Updated at: {profileData.updated_at}
+                        <label>Joined at:</label> {profileData.created_at}
+                        <br />
+                        <label>Updated at:</label> {profileData.updated_at}
                         <br />
                       </Card.Text>
                     </Col>

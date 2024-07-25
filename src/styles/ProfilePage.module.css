@@ -1,0 +1,55 @@
+.PofileContainer {
+    background: #FAF9F6;
+    border: 3px ridge #00cccc;
+    border-radius: 10px;
+}
+
+.card {
+    border: 3px ridge #00cccc;
+    border-radius: 10px;
+}
+
+.Input {
+    background: transparent;
+    border: 2px ridge #d0fffe;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #030011;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+label {
+    font-size: 18px;
+}
+
+.ProfileImg {
+    border-radius: 10px;
+}
+
+.fa-circle-chevron-down:before {
+    color: #808000;
+    font-size: 20px;
+    margin-right: -0.5rem;
+}
+
+.fa-edit:before,
+.fa-pen-to-square:before,
+.fa-key:before {
+    color: #009393;
+}
+
+.dropdown-item {
+    color: #030011;
+}
+
+.dropdown-menu.show {
+    border: 1px solid #00cccc;
+}
+
+/* Responsive */
+@media (min-width: 767px) {
+    .ProfileImg {
+      width: 60%;
+    }
+  }

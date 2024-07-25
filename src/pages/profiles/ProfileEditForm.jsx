@@ -15,6 +15,7 @@ import {
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
 
+import styles from "../../styles/ProfilePage.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
@@ -107,13 +108,14 @@ const ProfileEditForm = () => {
 
   const textFields = (
     <>
-      <Form.Group>
+      <Form.Group className="p-2">
         <Form.Label>First Name</Form.Label>
         <Form.Control
           type="text"
           value={first_name}
           onChange={handleChange}
           name="first_name"
+          className={`${styles.Input} mx-auto shadow`}
         />
       </Form.Group>
       {errors?.first_name?.map((message, idx) => (
@@ -121,13 +123,14 @@ const ProfileEditForm = () => {
           {message}
         </Alert>
       ))}
-      <Form.Group>
+      <Form.Group className="p-2">
         <Form.Label>Last Name</Form.Label>
         <Form.Control
           type="text"
           value={last_name}
           onChange={handleChange}
           name="last_name"
+          className={`${styles.Input} mx-auto shadow`}
         />
       </Form.Group>
       {errors?.last_name?.map((message, idx) => (
@@ -135,13 +138,14 @@ const ProfileEditForm = () => {
           {message}
         </Alert>
       ))}
-      <Form.Group>
+      <Form.Group className="p-2">
         <Form.Label>Email Address</Form.Label>
         <Form.Control
           type="email"
           value={email_address}
           onChange={handleChange}
           name="email_address"
+          className={`${styles.Input} mx-auto shadow`}
         />
       </Form.Group>
       {errors?.email_address?.map((message, idx) => (
@@ -150,13 +154,14 @@ const ProfileEditForm = () => {
         </Alert>
       ))}
 
-      <Form.Group>
+      <Form.Group className={`${styles.ProfileEditForm} p-2`}>
         <Form.Label>Phone</Form.Label>
         <Form.Control
           type="text"
           value={phone}
           onChange={handleChange}
           name="phone"
+          className={`${styles.Input} mx-auto shadow`}
         />
       </Form.Group>
       {errors?.phone?.map((message, idx) => (
@@ -167,13 +172,13 @@ const ProfileEditForm = () => {
       ))}
 
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Bright} m-3`}
+        className={`${btnStyles.Button} ${btnStyles.ButtonDanger} m-3 shadow`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Bright}`}
+        className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow`}
         type="submit"
       >
         save
@@ -183,13 +188,13 @@ const ProfileEditForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Row style={{ marginTop: "8rem" }}>
+      <Row className="mx-2 my-4 pt-3">
         <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
-          <Container className={appStyles.Content}>
-            <Form.Group>
+          <Container className={`${appStyles.Content} shadow`}>
+            <Form.Group className="w-75 pt-2 rounded mx-auto">
               {image && (
                 <figure>
-                  <Image src={image} fluid />
+                  <Image className="shadow" src={image} fluid />
                 </figure>
               )}
               {errors?.image?.map((message, idx) => (
@@ -199,7 +204,7 @@ const ProfileEditForm = () => {
               ))}
               <div>
                 <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Bright} btn my-auto mb-5`}
+                  className={`${btnStyles.Button} ${btnStyles.ButtonTertiary} my-auto px-1 py-2 mb-3 shadow`}
                   htmlFor="image-upload"
                 >
                   Change the image

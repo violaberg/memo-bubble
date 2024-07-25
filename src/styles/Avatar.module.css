@@ -1,4 +1,5 @@
 .Avatar {
+  border: 1px ridge #00cccc;
   border-radius: 50%;
   margin: 0px 8px 0px 8px;
   object-fit: cover;

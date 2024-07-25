@@ -17,7 +17,7 @@ const DeveloperDetails = () => {
                 <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
             </a>
         </div>
-        <div>
+        <div className="pt-2">
         <span>Vasileios Tsimourdagkas</span><br></br>
             <a href="https://github.com/Vasileios20" target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faGithub} /> GitHub
