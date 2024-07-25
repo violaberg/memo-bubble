@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 
 const CaretDown = React.forwardRef(({ onClick }, ref) => (
   <i
-    className={`fas fa-square-caret-down ${styles.DropdownCaret}`}
+    className={`fa-solid fa-circle-chevron-down ${styles.DropdownCaret}`}
     ref={ref}
     onClick={(e) => {
       e.preventDefault();
@@ -71,19 +71,19 @@ export function ProfileEditDropdown({ id }) {
           onClick={() => history.push(`/profiles/${id}/edit`)}
           aria-label="edit-profile"
         >
-          <i className="fas fa-edit" /> edit profile
+          <i className="fas fa-edit" /> Edit profile
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/username`)}
           aria-label="edit-username"
         >
-          <i className="far fa-id-card" /> change username
+          <i className="far fa-id-card" /> Change username
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
         >
-          <i className="fas fa-key" /> change password
+          <i className="fas fa-key" /> Change password
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

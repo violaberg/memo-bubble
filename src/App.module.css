@@ -95,6 +95,12 @@ strong {
   opacity: 0.8;
 }
 
+label {
+  color: #808000;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
 figure {
   text-align: center;
   display: inline-block;
