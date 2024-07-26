@@ -62,7 +62,7 @@ const UsernameForm = () => {
   };
 
   return (
-    <Row style={{ marginTop: "8rem" }}>
+    <Row className="mx-2" style={{ marginTop: "8rem" }}>
       <Col className="py-2 mx-auto text-center" md={6} lg={4}>
         <Container className={`${appStyles.Content} mx-auto shadow`}>
           <Form onSubmit={handleSubmit} className="my-2">
