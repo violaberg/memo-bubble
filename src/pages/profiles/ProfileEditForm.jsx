@@ -187,52 +187,56 @@ const ProfileEditForm = () => {
   );
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row className="mx-2 my-4 pt-3">
-        <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
-          <Container className={`${appStyles.Content} shadow`}>
-            <Form.Group className="w-75 pt-2 rounded mx-auto">
-              {image && (
-                <figure>
-                  <Image className="shadow" src={image} fluid />
-                </figure>
-              )}
-              {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-              <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.ButtonTertiary} my-auto px-1 py-2 mb-3 shadow`}
-                  htmlFor="image-upload"
-                >
-                  Change the image
-                </Form.Label>
-              </div>
-              <input
-                type="file"
-                id="image-upload"
-                ref={imageFile}
-                accept="image/*"
-                onChange={(e) => {
-                  if (e.target.files.length) {
-                    setProfileData({
-                      ...profileData,
-                      image: URL.createObjectURL(e.target.files[0]),
-                    });
-                  }
-                }}
-              />
-            </Form.Group>
-            <div className="d-md-none">{textFields}</div>
-          </Container>
-        </Col>
-        <Col md={5} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-      </Row>
-    </Form>
+    <Row className="mx-3">
+      <Col className={`${appStyles.Content} mx-auto my-4 shadow`} lg={10} xl={8}>
+        <Form onSubmit={handleSubmit}>
+          <Row className="my-2">
+            <Col className="p-0 p-md-2 text-center" md={7} lg={6}>
+              <Container>
+                <Form.Group className="pt-3 mx-auto">
+                  {image && (
+                    <figure>
+                      <Image className={`${styles.ProfileEditFormImg} w-75 shadow`} src={image} fluid />
+                    </figure>
+                  )}
+                  {errors?.image?.map((message, idx) => (
+                    <Alert variant="warning" key={idx}>
+                      {message}
+                    </Alert>
+                  ))}
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.ButtonTertiary} my-auto px-1 py-2 mb-3 shadow`}
+                      htmlFor="image-upload"
+                    >
+                      Change the image
+                    </Form.Label>
+                  </div>
+                  <input
+                    type="file"
+                    id="image-upload"
+                    ref={imageFile}
+                    accept="image/*"
+                    onChange={(e) => {
+                      if (e.target.files.length) {
+                        setProfileData({
+                          ...profileData,
+                          image: URL.createObjectURL(e.target.files[0]),
+                        });
+                      }
+                    }}
+                  />
+                </Form.Group>
+                <div className="d-md-none">{textFields}</div>
+              </Container>
+            </Col>
+            <Col md={5} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
+              <Container>{textFields}</Container>
+            </Col>
+          </Row>
+        </Form>
+    </Col>
+    </Row>
   );
 };
 
