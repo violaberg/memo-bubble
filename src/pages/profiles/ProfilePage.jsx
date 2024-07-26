@@ -60,7 +60,7 @@ function ProfilePage() {
       {currentUser && (
         <Container className="my-3 pt-2">
           <Row>
-            <Col className="my-2 mx-auto col-lg-10">
+            <Col className="my-2 mx-auto col-lg-10 col-xl-8">
             <h1 className="pt-2">{profileData.first_name}'s Profile Page</h1>
               <Card className={`${appStyles.Content} my-2 shadow`}>
                   <>

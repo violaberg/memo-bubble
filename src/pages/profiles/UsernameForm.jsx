@@ -16,6 +16,7 @@ import {
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import styles from "../../styles/ProfilePage.module.css";
 
 const UsernameForm = () => {
   /**
@@ -61,17 +62,18 @@ const UsernameForm = () => {
   };
 
   return (
-    <Row style={{ marginTop: "8rem" }}>
-      <Col className="py-2 mx-auto text-center" md={6}>
-        <Container className={appStyles.Content}>
+    <Row className="mx-2" style={{ marginTop: "8rem" }}>
+      <Col className="py-2 mx-auto text-center" md={6} lg={4}>
+        <Container className={`${appStyles.Content} mx-auto shadow`}>
           <Form onSubmit={handleSubmit} className="my-2">
             <Form.Group>
-              <Form.Label>Change username</Form.Label>
+              <Form.Label className={styles.ProfileFormHeader}>Change username</Form.Label>
               <Form.Control
                 placeholder="username"
                 type="text"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
+                className={`${styles.Input} mx-auto my-2 shadow w-75`}
               />
             </Form.Group>
             {errors?.username?.map((message, idx) => (
@@ -80,13 +82,13 @@ const UsernameForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Bright} mr-3`}
+              className={`${btnStyles.Button} ${btnStyles.ButtonDanger} shadow mr-3`}
               onClick={() => history.goBack()}
             >
               cancel
             </Button>
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Bright} `}
+              className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow`}
               type="submit"
             >
               save

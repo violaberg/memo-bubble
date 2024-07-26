@@ -47,9 +47,27 @@ label {
     border: 1px solid #00cccc;
 }
 
+/* Profile edit form */
+.ProfileEditFormImg {
+    border-radius: 10px;
+}
+
+.ProfileFormHeader {
+    color: #808000;
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
 /* Responsive */
 @media (min-width: 767px) {
     .ProfileImg {
       width: 60%;
     }
-  }
+}
+
+@media (min-width: 992px) {
+    .ProfileImg {
+        margin-bottom: 1.5rem;
+    }
+}
