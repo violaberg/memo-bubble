@@ -190,6 +190,7 @@ const ProfileEditForm = () => {
     <Row className="mx-3">
       <Col className={`${appStyles.Content} mx-auto my-4 shadow`} lg={10} xl={8}>
         <Form onSubmit={handleSubmit}>
+        <div className={`${styles.ProfileFormHeader} text-center`}>Edit details</div>
           <Row className="my-2">
             <Col className="p-0 p-md-2 text-center" md={7} lg={6}>
               <Container>

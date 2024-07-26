@@ -13,6 +13,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import styles from "../../styles/ProfilePage.module.css";
 
 const UserPasswordForm = () => {
   /**
@@ -60,17 +61,18 @@ const UserPasswordForm = () => {
 
   return (
     <Row className="mt-5 pt-5">
-      <Col className="py-5 mx-auto text-center" md={6}>
-        <Container className={appStyles.Content}>
+      <Col className="py-5 mx-auto text-center" md={6} lg={4}>
+        <Container className={`${appStyles.Content} mx-auto shadow`}>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Label>New password</Form.Label>
+              <Form.Label className={`${styles.ProfileFormHeader}`}>New password</Form.Label>
               <Form.Control
-                placeholder="new password"
+                placeholder="New Password"
                 type="password"
                 value={new_password1}
                 onChange={handleChange}
                 name="new_password1"
+                className={`${styles.Input} mx-auto my-2 shadow w-75`}
               />
             </Form.Group>
             {errors?.new_password1?.map((message, idx) => (
@@ -79,13 +81,14 @@ const UserPasswordForm = () => {
               </Alert>
             ))}
             <Form.Group>
-              <Form.Label>Confirm password</Form.Label>
+              <Form.Label className={`${styles.ProfileFormHeader}`}>Confirm password</Form.Label>
               <Form.Control
-                placeholder="confirm new password"
+                placeholder="Confirm New Password"
                 type="password"
                 value={new_password2}
                 onChange={handleChange}
                 name="new_password2"
+                className={`${styles.Input} mx-auto my-2 shadow w-75`}
               />
             </Form.Group>
             {errors?.new_password2?.map((message, idx) => (
@@ -94,14 +97,14 @@ const UserPasswordForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Bright} m-3`}
+              className={`${btnStyles.Button} ${btnStyles.ButtonDanger} shadow m-3`}
               onClick={() => history.goBack()}
             >
               cancel
             </Button>
             <Button
               type="submit"
-              className={`${btnStyles.Button} ${btnStyles.Bright}`}
+              className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow`}
             >
               save
             </Button>
