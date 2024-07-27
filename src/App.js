@@ -14,6 +14,7 @@ import CapsuleCreateForm from './pages/capsules/CapsuleCreateForm';
 import ProfilePage from "./pages/profiles/ProfilePage";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import UsernameForm from "./pages/profiles/UsernameForm";
+import UserCapsules from "./components/UserCapsules";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./pages/errors/NotFound";
 import Forbidden403 from "./pages/errors/Forbidden403";
@@ -65,6 +66,11 @@ function App() {
             <Route exact path="/capsules" render={() => <CapsulesPage />} />
             <Route exact path="/capsules/:id" render={() => <CapsulePage />} />
             <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+            <Route
+              exact
+              path="/profiles/:id/capsules"
+              render={() => <UserCapsules />}
+            />
             <Route
               exact
               path="/profiles/:id/edit"
