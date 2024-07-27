@@ -2,13 +2,13 @@ import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router-dom";
+import { axiosReq } from "../api/axiosDefaults"; // Ensure you import axiosReq if not already imported
 
 /**
  * The CaretDown component is a functional component that renders a caret down icon for a dropdown.
  * @param {function} onClick - The function to handle the click event.
  * @returns {JSX.Element} - The JSX for the component.
  */
-
 const CaretDown = React.forwardRef(({ onClick }, ref) => (
   <i
     className={`fa-solid fa-circle-chevron-down ${styles.DropdownCaret}`}
@@ -26,7 +26,6 @@ const CaretDown = React.forwardRef(({ onClick }, ref) => (
  * @param {function} handleDelete - The function to handle deleting the listing.
  * @returns {JSX.Element} - The JSX for the component.
  */
-
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   return (
     <Dropdown className={styles.Dropdown} drop="left">
@@ -60,9 +59,20 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
  * @param {number} id - The id of the user's profile.
  * @returns {JSX.Element} - The JSX for the component.
  */
-
 export function ProfileEditDropdown({ id }) {
   const history = useHistory();
+
+  const handleDeleteProfile = async () => {
+    if (window.confirm('Are you sure you want to delete your profile? This action cannot be undone.')) {
+      try {
+        await axiosReq.delete(`/profiles/${id}/`);
+        history.push('/'); // Redirect to home page or another appropriate page
+      } catch (err) {
+        console.error('Error deleting profile:', err);
+      }
+    }
+  };
+
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={CaretDown} />
@@ -90,6 +100,12 @@ export function ProfileEditDropdown({ id }) {
           aria-label="edit-password"
         >
           <i className="fas fa-key" /> Change password
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={handleDeleteProfile}
+          aria-label="delete-profile"
+        >
+          <i className="fas fa-trash-alt" /> <span className={styles.DangerText}>Delete my profile</span>
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
