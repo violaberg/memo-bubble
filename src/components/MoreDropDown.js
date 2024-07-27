@@ -68,6 +68,12 @@ export function ProfileEditDropdown({ id }) {
       <Dropdown.Toggle as={CaretDown} />
       <Dropdown.Menu>
         <Dropdown.Item
+          onClick={() => history.push(`/profiles/${id}/capsules`)}
+          aria-label="view-capsules"
+        >
+          <i className="fas fa-photo-film" /> My capsules
+        </Dropdown.Item>
+        <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit`)}
           aria-label="edit-profile"
         >

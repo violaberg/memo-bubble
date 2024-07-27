@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Col, Row } from 'react-bootstrap';
-import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
+import { Container, Col, Row, Card, Image } from 'react-bootstrap';
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 

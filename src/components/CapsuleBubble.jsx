@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from '../styles/Capsule.module.css';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import GeminiMessages from './GeminiMessages';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Container, Row, Col } from 'react-bootstrap';
+import Button from "react-bootstrap/Button";
 import { axiosRes } from '../api/axiosDefaults';
 import { MoreDropdown } from '../components/MoreDropDown';
+import btnStyles from "../styles/Button.module.css";
 
 const Capsule = ({ ...props }) => {
   const history = useHistory();
@@ -58,52 +58,68 @@ const Capsule = ({ ...props }) => {
         <h1>{title}</h1>
         <p>{message}</p>
         <p>
-          <strong>Created On: {created_on}</strong>
+          <span className={styles.CapsuleSpan}>Created On: {created_on}</span>
         </p>
         <p>
-          <strong>Updated On: {updated_on}</strong>
+          <span className={styles.CapsuleSpan}>Updated On: {updated_on}</span>
         </p>
       </Row>
       <Row className={styles.capsule}>
         <Col>
           <h2>Images</h2>
-          {imagesArray?.map((image, id) => (
-            <div>
-              <div className={styles.polaroid}>
-                <img
-                  key={id}
-                  src={image.url}
-                  alt='capsule'
-                  style={{ width: '100%', height: 'auto' }}
-                />
+          {imagesArray?.length > 0 ? (
+            imagesArray.map((image, id) => (
+              <div key={id}>
+                <div className={styles.polaroid}>
+                  <img
+                    src={image.url}
+                    alt='capsule'
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </div>
+                <span className={styles.CapsuleSpan}>Date taken : {image.date_taken}</span>
+                <h3>Gemini message</h3>
+                <GeminiMessages itemId={image.id} array={imagesArray} />
               </div>
-              <strong>Date taken : {image.date_taken}</strong>
-              <h3>Gemini message</h3>
-
-              <GeminiMessages itemId={image.id} array={imagesArray} />
+            ))
+          ) : (
+            <div>
+              <p className={styles.brandName}>No images available</p>
             </div>
-          ))}
+          )}
         </Col>
         <Col>
           <h2>Videos</h2>
-          {videosArray?.map((video, id) => (
-            <div>
-              <div className={styles.filmstrip}>
-                <video
-                  key={id}
-                  src={video.url}
-                  controls
-                  style={{ width: '100%', height: 'auto' }}
-                />
+          {videosArray?.length > 0 ? (
+            videosArray.map((video, id) => (
+              <div key={id}>
+                <div className={styles.filmstrip}>
+                  <video
+                    src={video.url}
+                    controls
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </div>
+                <span className={styles.CapsuleSpan}>Date taken : {video.date_taken}</span>
+                <h3>Gemini message</h3>
+                <GeminiMessages itemId={video.id} array={videosArray} />
               </div>
-              <strong>Date taken : {video.date_taken}</strong>
-              <h3>Gemini message</h3>
-
-              <GeminiMessages itemId={video.id} array={videosArray} />
+            ))
+          ) : (
+            <div>
+              <p className={styles.brandName}>No videos available</p>
             </div>
-          ))}
+          )}
         </Col>
       </Row>
+      <div className="text-center">
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow mr-3 mb-4`}
+          onClick={() => history.goBack()}
+        >
+          Back to all bubbles
+        </Button>
+      </div>
     </Container>
   );
 };

@@ -12,6 +12,11 @@
     text-align: center;
 }
 
+.CapsuleSpan {
+    color: #808000;
+    font-weight: 600;
+}
+
 .polaroid {
     background-color: #ffffff;
     box-shadow: 2px 1px 10px 2px lightgrey;
@@ -35,3 +40,12 @@
     padding: calc(var(--size) * 3) calc(var(--size) * 2.5);
     box-sizing: border-box;
   }
+
+.brandName {
+    background: linear-gradient(90deg, hsla(216, 99%, 56%, 1) 0%, hsla(350, 76%, 62%, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
