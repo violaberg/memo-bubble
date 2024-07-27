@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import styles from '../styles/Capsule.module.css';
 
 const GeminiMessages = ({ itemId, array }) => {
   // Find the image with the specified itemID
@@ -21,7 +22,7 @@ const GeminiMessages = ({ itemId, array }) => {
               </p>
             ))
           ) : (
-            <p>No Gemini messages found for this image.</p>
+            <p className={styles.brandName}>No Gemini messages found for this.</p>
           )}
         </Col>
       </Row>
