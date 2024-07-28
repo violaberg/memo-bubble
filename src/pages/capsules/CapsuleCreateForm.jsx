@@ -410,7 +410,7 @@ function CapsuleCreateForm() {
             )}
             <Row className='mx-auto w-50'>
               <button
-                className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} mx-auto btn mb-5`}
+                className={`${btnStyles.Button} ${btnStyles.ButtonTertiary} mx-auto btn mb-5`}
                 type='submit'
               >
                 Create Capsule
