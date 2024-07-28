@@ -13,7 +13,6 @@ import { Link, useHistory } from 'react-router-dom';
 
 import styles from '../../styles/SignInUpForm.module.css';
 import btnStyles from '../../styles/Button.module.css';
-import appStyles from '../../App.module.css';
 // import axios from "axios";
 
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
@@ -74,7 +73,7 @@ function SignInForm() {
                 />
               </Form.Group>
               {errors.username?.map((message, idx) => (
-                <Alert variant='warning' key={idx}>
+                <Alert className={styles.Alert} variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}
@@ -91,7 +90,7 @@ function SignInForm() {
                 />
               </Form.Group>
               {errors.password?.map((message, idx) => (
-                <Alert variant='warning' key={idx}>
+                <Alert className={styles.Alert} variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}
@@ -103,7 +102,7 @@ function SignInForm() {
                 Sign In
               </Button>
               {errors.non_field_errors?.map((message, idx) => (
-                <Alert variant='warning' key={idx} className='mt-3'>
+                <Alert className={`${styles.Alert} mt-3`} variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}
