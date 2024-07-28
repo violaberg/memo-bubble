@@ -76,36 +76,41 @@ export function ProfileEditDropdown({ id }) {
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={CaretDown} />
-      <Dropdown.Menu>
+      <Dropdown.Menu className={`${styles.DropdownMenu} shadow`}>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/capsules`)}
           aria-label="view-capsules"
+          className={styles.DropdownItem}
         >
-          <i className="fas fa-photo-film" /> My capsules
+          <i className={`${styles.ProfileIcon} fas fa-photo-film`} /> My capsules
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit`)}
           aria-label="edit-profile"
+          className={styles.DropdownItem}
         >
-          <i className="fas fa-edit" /> Edit profile
+          <i className={`${styles.ProfileIcon} fas fa-edit`} /> Edit profile
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/username`)}
           aria-label="edit-username"
+          className={styles.DropdownItem}
         >
-          <i className="far fa-id-card" /> Change username
+          <i className={`${styles.ProfileIcon} fas fa-id-card`} /> Change username
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
+          className={styles.DropdownItem}
         >
-          <i className="fas fa-key" /> Change password
+          <i className={`${styles.ProfileIcon} fas fa-key`} /> Change password
         </Dropdown.Item>
         <Dropdown.Item
           onClick={handleDeleteProfile}
           aria-label="delete-profile"
+          className={styles.DropdownItem}
         >
-          <i className="fas fa-trash-alt" /> <span className={styles.DangerText}>Delete my profile</span>
+          <i className={`${styles.ProfileIcon} fas fa-trash-alt`} /> <span className={styles.DangerText}>Delete my profile</span>
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

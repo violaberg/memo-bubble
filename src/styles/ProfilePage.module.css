@@ -27,26 +27,6 @@ label {
     border-radius: 10px;
 }
 
-.fa-circle-chevron-down:before {
-    color: #808000;
-    font-size: 20px;
-    margin-right: -0.5rem;
-}
-
-.fa-edit:before,
-.fa-pen-to-square:before,
-.fa-key:before {
-    color: #009393;
-}
-
-.dropdown-item {
-    color: #030011;
-}
-
-.dropdown-menu.show {
-    border: 1px solid #00cccc;
-}
-
 /* Profile edit form */
 .ProfileEditFormImg {
     border-radius: 10px;
@@ -58,6 +38,26 @@ label {
     font-weight: 600;
     opacity: 0.8;
 }
+
+/* User capsules profile section */
+.CardFooter {
+    background: transparent;
+    border-top: 1px solid #00cccc;
+}
+
+.BackIcon {
+    color: #030011;
+    cursor: pointer;
+    font-size: 1.2rem;
+    position: absolute;
+    right: 10px;
+    text-decoration: none;
+    top: 10px;
+  }
+  
+  .BackIcon:hover {
+    color: #808000;
+  }
 
 /* Responsive */
 @media (min-width: 767px) {

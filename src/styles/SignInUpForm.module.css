@@ -24,6 +24,7 @@
 
 .Link span {
   color: #00cccc;
+  font-weight: 600;
 }
 
 .Container {
@@ -58,4 +59,11 @@
   max-width: 18rem;
   height: auto;
   object-fit: cover;
+}
+
+.Alert {
+  --bs-alert-color: #ff5f5f;
+  --bs-alert-bg: transparent;
+  --bs-alert-border-color: transparent;
+  --bs-alert-link-color: #ff5f5f;
 }

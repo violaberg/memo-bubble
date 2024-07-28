@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 
 import styles from '../../styles/SignInUpForm.module.css';
 import btnStyles from '../../styles/Button.module.css';
-import appStyles from '../../App.module.css';
 
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
@@ -81,7 +80,7 @@ const SignUpForm = () => {
                 />
               </Form.Group>
               {errors.username?.map((message, idx) => (
-                <Alert variant='warning' key={idx}>
+                <Alert className={styles.Alert} variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}
@@ -110,7 +109,7 @@ const SignUpForm = () => {
                 />
               </Form.Group>
               {errors.password1?.map((message, idx) => (
-                <Alert variant='warning' key={idx}>
+                <Alert className={styles.Alert} variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}
@@ -126,7 +125,7 @@ const SignUpForm = () => {
                 />
               </Form.Group>
               {errors.password2?.map((message, idx) => (
-                <Alert variant='warning' key={idx}>
+                <Alert className={styles.Alert} variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}
@@ -138,7 +137,7 @@ const SignUpForm = () => {
                 Sign up
               </Button>
               {errors.non_field_errors?.map((message, idx) => (
-                <Alert variant='warning' key={idx} className='mt-3'>
+                <Alert className={`${styles.Alert} mt-3`} variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}

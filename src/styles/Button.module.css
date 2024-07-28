@@ -15,6 +15,7 @@
 .Button:hover {
   background-position: right center;
   border-color: transparent;
+  color: #f5f5f5;
 }
   
 .ButtonPrimary {

@@ -17,7 +17,7 @@ const Bubbles = ({ capsules, setCapsules, hasLoaded }) => {
     <Container
       id='scrollableDiv'
       fluid
-      className={bubbleStyles.BubblesContainer}
+      className={`${bubbleStyles.BubblesContainer} mt-4`}
     >
       {hasLoaded ? (
         <>
