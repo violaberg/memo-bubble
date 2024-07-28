@@ -1,13 +1,22 @@
-.Dropdown {
+.DropdownMenu {
   background-color: #faf9f6;
+  border: 2px ridge #00cccc;
   margin-left: auto;
-  
 }
 
 .DropdownItem {
-  display: inline-block;
+  color: #030011;
   max-width: 50%;
-  padding: 0px;
+}
+
+.DropdownCaret {
+  color: #808000;
+  font-size: 20px;
+  margin-right: -0.5rem;
+}
+
+.ProfileIcon {
+  color: #030011;
 }
 
 .Absolute {

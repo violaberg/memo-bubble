@@ -80,7 +80,7 @@ function ProfilePage() {
                       <Card.Title>
                         <h2 className="pt-4" style={{fontSize: "20px"}}>{profileData.first_name} {profileData.last_name}</h2>
                       </Card.Title>
-                      <Card.Text>
+                      <Card.Text className="pl-2">
                         <label>Username:</label> {profileData.owner}
                         <br />
                         <label>Email:</label> {profileData.email_address}
