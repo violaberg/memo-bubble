@@ -1,11 +1,13 @@
 import React from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import logo from '../assets/logo.jpg';
 import styles from '../styles/Home.module.css';
 import btnStyles from '../styles/Button.module.css';
 
 const Home = () => {
+  const history = useHistory();
 
     return (
       <Container className="flex justify-content-center text-center my-3">
@@ -63,7 +65,7 @@ const Home = () => {
             </section>
             <Button
               className={`${btnStyles.Button} ${btnStyles.ButtonPrimary}`}
-              type='submit'
+              onClick={() => history.push(`/capsules`)}
             >
               Enter memory sanctuary
             </Button>
