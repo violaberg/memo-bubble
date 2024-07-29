@@ -37,6 +37,8 @@ function ProfilePage() {
     updated_at: "",
   });
 
+  const placeholderImageUrl = "https://memo-bubble-app.s3.eu-west-1.amazonaws.com/media/memo-bubble/placeholder/placeholder.png";
+
   // Fetch the profile data from the API.
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -71,7 +73,7 @@ function ProfilePage() {
                     <Col className="text-center pt-4 mx-auto" md={4}>
                       <Image
                         className={`${styles.ProfileImg} w-75 shadow`}
-                        src={profileData.image}
+                        src={profileData.image || placeholderImageUrl}
                         alt={profileData.owner}
                         fluid
                       />
