@@ -10,7 +10,7 @@
   }
   
   .score {
-    color: #030011;
+    color: #030003;
     font-size: 18px;
     left: 10px;
     position: absolute;
@@ -18,7 +18,7 @@
   }
   
   .timer {
-    color: #030011;
+    color: #030003;
     font-size: 18px;
     position: absolute;
     right: 10px;

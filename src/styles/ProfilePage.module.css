@@ -14,7 +14,7 @@
     border: 2px ridge #d0fffe;
     border-radius: 10px;
     box-sizing: border-box;
-    color: #030011;
+    color: #030003;
     margin-bottom: 10px;
     padding: 10px;
 }
@@ -46,7 +46,7 @@ label {
 }
 
 .BackIcon {
-    color: #030011;
+    color: #030003;
     cursor: pointer;
     font-size: 1.2rem;
     position: absolute;

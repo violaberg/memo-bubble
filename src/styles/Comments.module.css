@@ -1,0 +1,36 @@
+.CommentsSection {
+    margin-top: 2rem;
+}
+  
+.CommentsSection ul {
+    list-style-type: none;
+    padding: 0;
+}
+  
+.CommentsSection li {
+    list-style-type: none;
+    margin-bottom: 1rem;
+}
+  
+.CommentsSection form {
+    margin-top: 1rem;
+}
+  
+.CommentsSection textarea {
+    background: #FAF9F6;
+    border: 1px ridge #00cccc;
+    border-radius: 10px;
+    color: #030003;
+    height: 100px;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.CommentsSection textarea:focus {
+    outline: none;
+}
+
+.ErrorMessage {
+    color: rgb(201, 0, 0);
+}
