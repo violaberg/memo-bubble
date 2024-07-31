@@ -90,8 +90,8 @@ const Bubbles = ({ capsules, setCapsules, hasLoaded }) => {
                         ) : (
                           <Card.Img
                             variant="top"
-                            src="https://via.placeholder.com/150"
-                            className={bubbleStyles.BubbleImage}
+                            src="https://memo-bubble-app.s3.eu-west-1.amazonaws.com/media/memo-bubble/placeholder/no-img.png"
+                            className={bubbleStyles.BubbleNoImage}
                           />
                         )}
                           <h2 className={bubbleStyles.BubbleTitle}>

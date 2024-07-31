@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../styles/Capsule.module.css';
 import { useHistory } from 'react-router-dom';
 import GeminiMessages from './GeminiMessages';
+import Comments from '../components/Comments';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from "react-bootstrap/Button";
 import { axiosRes } from '../api/axiosDefaults';
@@ -112,9 +113,10 @@ const Capsule = ({ ...props }) => {
           )}
         </Col>
       </Row>
+      <Comments capsuleId={id} /> {/* Add the Comments component here */}
       <div className="text-center">
         <Button
-          className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow mr-3 mb-4`}
+          className={`${btnStyles.Button} ${btnStyles.ButtonTertiary} shadow mr-3 mb-4`}
           onClick={() => history.goBack()}
         >
           Back to all bubbles
