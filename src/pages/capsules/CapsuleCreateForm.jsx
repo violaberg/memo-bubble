@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
-//import Container from 'react-bootstrap/Container';
-//import Row from 'react-bootstrap/Row';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useRedirect } from '../../hooks/useRedirect';
 import CreatEditFormFields from '../../components/CapsuleCreateEditForm/CreatEditFormFields';
@@ -20,6 +18,7 @@ function CapsuleCreateForm() {
     title: '',
     message: '',
     release_date: '',
+    location: '',
     images: '',
     uploaded_images: [],
     uploaded_videos: [],
@@ -30,6 +29,7 @@ function CapsuleCreateForm() {
     title,
     message,
     release_date,
+    location,
     uploaded_images,
     uploaded_videos,
     gemini_message,
@@ -97,6 +97,20 @@ function CapsuleCreateForm() {
     setCapsuleData({
       ...capsuleData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleLocationSelect = useCallback((address) => {
+    setCapsuleData(prevData => ({
+      ...prevData,
+      location: address,
+    }));
+  }, []);
+
+  const handleLocationChange = (location) => {
+    setCapsuleData({
+      ...capsuleData,
+      location: location,
     });
   };
 
@@ -290,6 +304,7 @@ function CapsuleCreateForm() {
     formData.append('title', title);
     formData.append('message', message);
     formData.append('release_date', release_date);
+    formData.append('location', location);
     formData.append(
       'uploaded_images_metadata',
       JSON.stringify(metadata.uploaded_images_metadata)
@@ -322,13 +337,14 @@ function CapsuleCreateForm() {
   return (
     <Form className="mx-auto p-2" md={8} lg={6} onSubmit={handleSubmit}>
       <h1>Create a Capsule</h1>
-      <Container className={styles.capsuleForm}>
+      <Container className={styles.CapsuleForm}>
         <Row>
           <Col className="mx-auto" md={6}>
             <CreatEditFormFields
               capsuleData={capsuleData}
               errors={errors}
-              handleChange={handleChange}
+              handleLocationSelect={handleLocationSelect}
+              handleLocationChange={handleLocationChange}
             />
             <CreateEditFormImages
               capsuleData={capsuleData}
@@ -353,13 +369,13 @@ function CapsuleCreateForm() {
                 name='gemini_message'
                 value={capsuleData.gemini_message}
                 onChange={handleChange}
-                style={{ color: 'black' }}
+                style={{ color: '#030011' }}
               />
             </Form.Group>
             <Form.Group>
               <Form.Label
                 htmlFor='generated_gemini_message'
-                style={{ color: 'black' }}
+                style={{ color: '#030011' }}
               >
                 Generated Gemini message
               </Form.Label>

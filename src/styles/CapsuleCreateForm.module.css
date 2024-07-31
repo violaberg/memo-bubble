@@ -3,13 +3,24 @@
   min-height: 343px;
 }
 
-.capsuleForm {
+.CapsuleForm {
   background-color: #FAF9F6;
   border: 3px ridge #00cccc;
   border-radius: 10px;
   color: #030003;
   margin-bottom: 2rem;
   padding-top: 2rem;
+}
+
+.Input {
+  background: transparent;
+  border: 2px ridge #d0fffe;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #030011;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 10px;
 }
   
 .Image {

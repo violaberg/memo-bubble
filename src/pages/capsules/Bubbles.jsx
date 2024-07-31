@@ -43,7 +43,7 @@ const Bubbles = ({ capsules, setCapsules, hasLoaded }) => {
         <Col className="col-sm-6 col-lg-4 mx-auto">
           <Form.Group controlId="sortOrder" className="mb-4 mt-2">
             <Form.Label>Sort by:</Form.Label>
-            <Form.Control className={`${bubbleStyles.SearchBar} shadow`} as="select" value={sortOrder} onChange={handleSortChange}>
+            <Form.Control className={`${bubbleStyles.SortBar} shadow`} as="select" value={sortOrder} onChange={handleSortChange}>
               <option value="">Select...</option>
               <option value="-release_date">Latest Release</option>
               <option value="location">Location A-Z</option>
