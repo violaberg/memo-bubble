@@ -65,7 +65,9 @@ const Comments = ({ capsuleId }) => {
         )}
       </ul>
       {error && <div className={`${styles.ErrorMessage} text-center`}>{error}</div>}
-      {currentUser && (
+      {!currentUser ? (
+        <p className='text-center'><span className={styles.ErrorMessage}>Only signed-in users can leave a comment.</span> Please <a href="/signin">Sign in</a>.</p>
+      ) : (
         <form onSubmit={handleCommentSubmit}>
           <textarea
             value={newComment}
