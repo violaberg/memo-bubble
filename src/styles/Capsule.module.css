@@ -49,3 +49,11 @@
     font-size: 1.2rem;
     font-weight: 600;
 }
+
+.LikeButton {
+    color: red;
+}
+
+.LikeButton:hover {
+    color: rgb(235, 0, 0);
+}

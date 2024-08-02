@@ -4,6 +4,7 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 import Button from "react-bootstrap/Button";
 import styles from '../styles/Comments.module.css';
 import btnStyles from "../styles/Button.module.css";
+import { Row, Col } from 'react-bootstrap';
 
 const Comments = ({ capsuleId }) => {
   const currentUser = useCurrentUser();
@@ -49,36 +50,42 @@ const Comments = ({ capsuleId }) => {
   };
 
   return (
-    <div className={styles.CommentsSection}>
-      <h2>Comments</h2>
-      <ul>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
-            <li key={comment.id}>
-              <strong>{comment.owner}</strong>: {comment.comment}
-              <br />
-              <small>Posted on {new Date(comment.created_on).toLocaleString()}</small>
-            </li>
-          ))
-        ) : (
-          <li className='text-center'>No comments yet. Be the first one to contribute!</li>
-        )}
-      </ul>
-      {error && <div className={`${styles.ErrorMessage} text-center`}>{error}</div>}
-      {currentUser && (
-        <form onSubmit={handleCommentSubmit}>
-          <textarea
-            value={newComment}
-            onChange={handleCommentChange}
-            placeholder="Add a comment"
-            required
-          />
-          <div className='text-center'>
-          <Button className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow mr-3 mb-3`} type="submit">Add Comment</Button>
-          </div>
-        </form>
-      )}
-    </div>
+    <Row>
+      <Col className='col-md-8 col-lg-6 mx-auto'>
+        <div className={styles.CommentsSection}>
+          <h2>Comments</h2>
+          <ul>
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <li key={comment.id}>
+                  <strong>{comment.owner}</strong>: {comment.comment}
+                  <br />
+                  <small>Posted on {new Date(comment.created_on).toLocaleString()}</small>
+                </li>
+              ))
+            ) : (
+              <li className='text-center'>No comments yet. Be the first one to contribute!</li>
+            )}
+          </ul>
+          {error && <div className={`${styles.ErrorMessage} text-center`}>{error}</div>}
+          {!currentUser ? (
+            <p className='text-center'><span className={styles.ErrorMessage}>Only signed-in users can leave a comment.</span> Please <a href="/signin">Sign in</a>.</p>
+          ) : (
+            <form onSubmit={handleCommentSubmit}>
+              <textarea
+                value={newComment}
+                onChange={handleCommentChange}
+                placeholder="Add a comment"
+                required
+              />
+              <div className='text-center'>
+              <Button className={`${btnStyles.Button} ${btnStyles.ButtonSecondary} shadow mr-3 mb-3`} type="submit">Add Comment</Button>
+              </div>
+            </form>
+          )}
+        </div>
+    </Col>
+    </Row>
   );
 };
 
