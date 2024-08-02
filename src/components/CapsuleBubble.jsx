@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RWebShare } from "react-web-share";
 import styles from '../styles/Capsule.module.css';
 import { useHistory } from 'react-router-dom';
 import GeminiMessages from './GeminiMessages';
@@ -119,6 +120,16 @@ const Capsule = ({ ...props }) => {
         <LikeButton capsuleId={id} likesCount={likesCount} setLikesCount={setLikesCount} />
         <p>{likesCount} {likesCount === 1 ? 'Like' : 'Likes'}</p>
       </div>
+      <RWebShare
+          data={{
+            text: message,
+            url: window.location.href,
+            title: title,
+          }}
+          onClick={() => console.log("shared successfully!")}
+        >
+          <i className={`${styles.ShareButton} fa-solid fa-share`}></i>
+        </RWebShare>
       <Comments capsuleId={id} /> {/* Add the Comments component here */}
       <div className="text-center">
         <Button
