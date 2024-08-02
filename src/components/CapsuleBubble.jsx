@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Capsule.module.css';
 import { useHistory } from 'react-router-dom';
 import GeminiMessages from './GeminiMessages';
@@ -8,9 +8,11 @@ import Button from "react-bootstrap/Button";
 import { axiosRes } from '../api/axiosDefaults';
 import { MoreDropdown } from '../components/MoreDropDown';
 import btnStyles from "../styles/Button.module.css";
+import LikeButton from '../components/LikeButton';
 
 const Capsule = ({ ...props }) => {
   const history = useHistory();
+  const [likesCount, setLikesCount] = useState(props.likes_count || 0);
 
   // Destructure the props
   const {
@@ -113,6 +115,10 @@ const Capsule = ({ ...props }) => {
           )}
         </Col>
       </Row>
+      <div>
+        <LikeButton capsuleId={id} likesCount={likesCount} setLikesCount={setLikesCount} />
+        <p>{likesCount} {likesCount === 1 ? 'Like' : 'Likes'}</p>
+      </div>
       <Comments capsuleId={id} /> {/* Add the Comments component here */}
       <div className="text-center">
         <Button

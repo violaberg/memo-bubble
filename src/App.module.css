@@ -93,6 +93,7 @@ input[type='file'] {
 
 strong {
   color: #808000;
+  font-weight: 700;
   opacity: 0.8;
 }
 
