@@ -51,9 +51,22 @@
 }
 
 .LikeButton {
-    color: red;
+    color: #ff0000;
 }
 
 .LikeButton:hover {
-    color: rgb(235, 0, 0);
+    color: #eb0000;
+}
+
+.ShareButton {
+    color: #808000;
+    cursor: pointer;
+    display: inline-flex;
+    float: right;
+    font-size: 2rem;
+    margin-top: -5rem;
+}
+
+.ShareButton:hover {
+    color: #636300;
 }
