@@ -1,22 +1,22 @@
 .DropdownMenu {
-  background-color: #faf9f6;
-  border: 2px ridge #00cccc;
+  background-color: var(--white-color);
+  border: 2px ridge var(--light-cyan);
   margin-left: auto;
 }
 
 .DropdownItem {
-  color: #030003;
+  color: var(--primary-text-color);
   max-width: 50%;
 }
 
 .DropdownCaret {
-  color: #808000;
+  color: var(--olive-green-text);
   font-size: 20px;
   margin-right: -0.5rem;
 }
 
 .ProfileIcon {
-  color: #030003;
+  color: var(--primary-text-color);
 }
 
 .Absolute {
@@ -30,5 +30,5 @@
 }
 
 .DangerText {
-  color: #ff5f5f;
+  color: var(--error-color);
 }

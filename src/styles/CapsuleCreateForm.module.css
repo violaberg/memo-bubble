@@ -4,10 +4,10 @@
 }
 
 .CapsuleForm {
-  background-color: #FAF9F6;
-  border: 3px ridge #00cccc;
+  background-color: var(--white-color);
+  border: 3px ridge var(--light-cyan);
   border-radius: 10px;
-  color: #030003;
+  color: var(--primary-text-color);
   margin-bottom: 2rem;
   padding-top: 2rem;
 }
@@ -17,7 +17,7 @@
   border: 2px ridge #d0fffe;
   border-radius: 10px;
   box-sizing: border-box;
-  color: #030003;
+  color: var(--primary-text-color);
   margin-bottom: 10px;
   text-align: center;
   padding: 10px;
@@ -35,7 +35,7 @@
 }
 
 .generatedMessage {
-  border: 2px ridge #00cccc;
+  border: 2px ridge var(--light-cyan);
   border-radius: 10px;
   padding: 1rem;
 }

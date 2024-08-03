@@ -1,11 +1,11 @@
 .PofileContainer {
-    background: #FAF9F6;
-    border: 3px ridge #00cccc;
+    background: var(--white-color);
+    border: 3px ridge var(--light-cyan);
     border-radius: 10px;
 }
 
 .card {
-    border: 3px ridge #00cccc;
+    border: 3px ridge var(--light-cyan);
     border-radius: 10px;
 }
 
@@ -14,7 +14,7 @@
     border: 2px ridge #d0fffe;
     border-radius: 10px;
     box-sizing: border-box;
-    color: #030003;
+    color: var(--primary-text-color);
     margin-bottom: 10px;
     padding: 10px;
 }
@@ -33,7 +33,7 @@ label {
 }
 
 .ProfileFormHeader {
-    color: #808000;
+    color: var(--olive-green-text);
     font-size: 1.5rem;
     font-weight: 600;
     opacity: 0.8;
@@ -42,11 +42,11 @@ label {
 /* User capsules profile section */
 .CardFooter {
     background: transparent;
-    border-top: 1px solid #00cccc;
+    border-top: 1px solid var(--light-cyan);
 }
 
 .BackIcon {
-    color: #030003;
+    color: var(--primary-text-color);
     cursor: pointer;
     font-size: 1.2rem;
     position: absolute;
@@ -56,7 +56,7 @@ label {
   }
   
   .BackIcon:hover {
-    color: #808000;
+    color: var(--olive-green-text);
   }
 
 /* Responsive */

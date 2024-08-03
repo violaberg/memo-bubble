@@ -3,7 +3,7 @@
     background-size: 200% auto;
     border-color: transparent;
     border-radius: 10px;
-    color: #F0F8FF;
+    color: var(--white-color);
     font-size: 18px;
     font-weight: 500;
     flex: 1 1 auto;
@@ -15,33 +15,33 @@
 .Button:hover {
   background-position: right center;
   border-color: transparent;
-  color: #f5f5f5;
+  color: var(--white-color);
 }
   
 .ButtonPrimary {
   background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
   border: 3px ridge #a6c1ee;
-  color: #f5f5f5;
+  color: var(--white-color);
   font-weight: 700;
 }
 
 .ButtonSecondary {
   background-image: linear-gradient(to right, #98fdbd 0%, #8fd3f4 51%, #84fab0 100%);
   border: 3px ridge #8fd3f4;
-  color: #f5f5f5;
+  color: var(--white-color);
   font-weight: 700;
 }
 
 .ButtonTertiary {
   background: linear-gradient(90deg, hsla(141, 54%, 86%, 1) 0%, hsla(333, 73%, 85%, 1) 50%, hsla(211, 58%, 79%, 1) 100%);
   border: 3px ridge #ABC9E9;
-  color: #f5f5f5;
+  color: var(--white-color);
   font-weight: 700;
 }
 
 .ButtonDanger {
   background-image: linear-gradient(to right, #fedeba 0%, #ff5f5f 51%, #fedeba 100%);
   border: 3px ridge #ff5f5f;
-  color: #f5f5f5;
+  color: var(--white-color);
   font-weight: 700;
 }

@@ -1,6 +1,6 @@
 .capsule {
-    background-color: #FAF9F6;
-    border: 3px ridge #00CCCC;
+    background-color: var(--white-color);
+    border: 3px ridge var(--light-cyan);
     border-radius: 10px;
     margin: 1.5rem 0;
     padding: 20px;
@@ -8,12 +8,12 @@
 
 .capsule p {
     font-size: 1rem;
-    color: #030003;
+    color: var(--primary-text-color);
     text-align: center;
 }
 
 .CapsuleSpan {
-    color: #808000;
+    color: var(--olive-green-text);
     font-weight: 600;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .LikeButton {
-    color: #ff0000;
+    color: var(--error-color);
 }
 
 .LikeButton:hover {
@@ -59,7 +59,7 @@
 }
 
 .ShareButton {
-    color: #808000;
+    color: var(--olive-green-text);
     cursor: pointer;
     display: inline-flex;
     float: right;

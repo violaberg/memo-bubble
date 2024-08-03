@@ -1,5 +1,5 @@
 .logoImg {
-    border: 3px ridge #00cccc;
+    border: 3px ridge var(--light-cyan);
     border-radius: 15px;
     margin: 0 auto;
     width: 260px;
@@ -18,5 +18,5 @@ section {
 }
 
 p {
-    color: #030011;
+    color: var(--primary-text-color);
 }
