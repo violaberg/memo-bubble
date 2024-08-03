@@ -1,6 +1,6 @@
 .gameContainer {
-    background: #FAF9F6;
-    border: 3px ridge #00cccc;
+    background: var(--white-color);
+    border: 3px ridge var(--light-cyan);
     border-radius: 10px;
     height: 500px;
     overflow: hidden;
@@ -10,7 +10,7 @@
   }
   
   .score {
-    color: #030003;
+    color: var(--primary-text-color);
     font-size: 18px;
     left: 10px;
     position: absolute;
@@ -18,7 +18,7 @@
   }
   
   .timer {
-    color: #030003;
+    color: var(--primary-text-color);
     font-size: 18px;
     position: absolute;
     right: 10px;

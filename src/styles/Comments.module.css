@@ -17,10 +17,10 @@
 }
   
 .CommentsSection textarea {
-    background: #FAF9F6;
-    border: 1px ridge #00cccc;
+    background: var(--white-color);
+    border: 1px ridge var(--light-cyan);
     border-radius: 10px;
-    color: #030003;
+    color: var(--primary-text-color);
     height: 100px;
     margin-bottom: 0.5rem;
     padding: 0.5rem;
@@ -32,5 +32,5 @@
 }
 
 .ErrorMessage {
-    color: #c90000;
+    color: var(--error-color);
 }

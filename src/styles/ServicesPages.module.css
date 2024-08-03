@@ -39,8 +39,8 @@
 .FaqContainer,
 .TermsContainer,
 .PolicyContainer {
-  background: #FAF9F6;
-  border: 3px ridge #00cccc;
+  background: var(--white-color);
+  border: 3px ridge var(--light-cyan);
   border-radius: 10px;
   margin-bottom: 1rem;
   padding: 1rem;

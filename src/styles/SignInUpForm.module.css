@@ -8,7 +8,7 @@
   border: 2px ridge #d0fffe;
   border-radius: 10px;
   box-sizing: border-box;
-  color: #030003;
+  color: var(--primary-text-color);
   margin-bottom: 10px;
   text-align: center;
   padding: 10px;
@@ -23,7 +23,7 @@
 }
 
 .Link span {
-  color: #00cccc;
+  color: var(--light-cyan);
   font-weight: 600;
 }
 
@@ -32,8 +32,8 @@
 }
 
 .SignInUpForm {
-  background: #FAF9F6;
-  border: 3px ridge #00cccc;
+  background: var(--white-color);
+  border: 3px ridge var(--light-cyan);
   border-radius: 10px;
   max-width: 720px;
 }
@@ -47,14 +47,14 @@
 }
 
 .SignInUpLink {
-  background-color: #faf9f6;
+  background-color: var(--white-color);
   padding: 10px;
-  border: 2px ridge #00cccc;
+  border: 2px ridge var(--light-cyan);
   border-radius: 10px;
 }
 
 .FillerImage {
-  border: 2px ridge #00cccc;
+  border: 2px ridge var(--light-cyan);
   border-radius: 10px;
   max-width: 18rem;
   height: auto;
@@ -62,8 +62,8 @@
 }
 
 .Alert {
-  --bs-alert-color: #ff5f5f;
+  --bs-alert-color: var(--error-color);
   --bs-alert-bg: transparent;
   --bs-alert-border-color: transparent;
-  --bs-alert-link-color: #ff5f5f;
+  --bs-alert-link-color: var(--error-color);
 }

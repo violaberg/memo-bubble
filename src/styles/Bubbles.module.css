@@ -35,7 +35,7 @@
 }
 
 .BubbleImage {
-  border: 1px ridge #00cccc;
+  border: 1px ridge var(--light-cyan);
   border-radius: 10px;
   height: 70px;
   margin-top: 1.5rem;
@@ -58,7 +58,7 @@
 .BubbleOwner,
 .BubbleLocation,
 .BubbleDate {
-  color: #030011;
+  color: var(--primary-text-color);
   font-size: 0.9rem;
   margin: 2px 0;
 }
@@ -97,7 +97,7 @@
 }
 
 .SortBar {
-  border: 1px solid #00cccc;
-  background: #FAF9F6;
-  color: #030011;
+  border: 1px solid var(--light-cyan);
+  background: var(--white-color);
+  color: var(--primary-text-color);
 }
