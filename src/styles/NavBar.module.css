@@ -17,7 +17,7 @@
 
 .NavLink {
   padding: 8px 10px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   color: var(--light-cyan);
 }
@@ -52,6 +52,16 @@ svg {
 .Logo {
   border: 1px solid var(--light-cyan);
   border-radius: 5px;
+}
+
+/* Notificatons */
+.NotificationBell {
+  align-items: center;
+  color: var(--olive-green-text);
+  cursor: pointer;
+  display: flex;
+  font-size: 1.25rem;
+  position: relative;
 }
 
 /*Responsive*/

@@ -14,6 +14,7 @@ import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
+import NotificationBell from "../components/NotificationBell";
 
 
 const NavBar = () => {
@@ -49,6 +50,7 @@ const NavBar = () => {
           fontWeight="bold"
           height={30} />
       </NavLink>
+      <NotificationBell /> {/* Include the NotificationBell component */}
     </>
   );
   const loggedOutIcons = (
