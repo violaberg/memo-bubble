@@ -1,6 +1,7 @@
 :root {
   --white-color: #faf9f6;
   --light-cyan: #00cccc;
+  --lightest-blue: #d0fffe;
   --primary-text-color: #030011;
   --olive-green-text: #808000;
   --dark-cyan: #009393;
@@ -120,18 +121,21 @@ figure {
 }
 
 /* Cookie Banner */
+.CookieBannerContainer {
+  background: linear-gradient(90deg, hsla(141, 54%, 86%, 1) 0%, hsla(333, 73%, 85%, 1) 50%, hsla(211, 58%, 79%, 1) 100%) !important;
+  border-top: 2px ridge var(--lightest-blue);
+}
 .CookieBannerContent {
-  background-color: var(--primary-text-color);
-  color: var(--white-color);
-  font-size: 11px;
-  margin-bottom: 1rem;
+  border-radius: 10px;
+  color: var(--primary-text-color);
+  font-size: 0.8rem;
+  text-align: justify;
 }
 
 .CookieBannerButtonWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
+  background-color: transparent;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .CookieReset {
@@ -141,15 +145,14 @@ figure {
   bottom: 10px;
   cursor: pointer;
   font-size: 1.5rem;
-  padding: 2px 5px;
+  padding: 4px 8px;
   position: fixed;
   right: 10px;
   z-index: 900;
 }
 
-.CookieReset:hover {
-  background-color: var(--primary-text-color);
-  color: var(--white-color);
+.CookieReset i:hover {
+  transform: scale(1.2);
 }
 
 /* Responsive */

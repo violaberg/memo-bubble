@@ -14,7 +14,7 @@
 
 .Input {
   background: transparent;
-  border: 2px ridge #d0fffe;
+  border: 2px ridge var(--lightest-blue);
   border-radius: 10px;
   box-sizing: border-box;
   color: var(--primary-text-color);
