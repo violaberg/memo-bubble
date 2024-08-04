@@ -82,7 +82,7 @@ const NavBar = () => {
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
+            <img className={styles.Logo} src={logo} alt="logo" height="45" />
           </Navbar.Brand>
         </NavLink>
 
@@ -93,7 +93,7 @@ const NavBar = () => {
           className={btnStyles.ButtonTertiary}
         />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto text-left">
+          <Nav className="mx-auto">
             <NavLink
               exact
               className={styles.NavLink}

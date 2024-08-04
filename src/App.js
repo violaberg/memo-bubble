@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
-import { useState } from "react";
 import styles from './App.module.css';
 import Container from 'react-bootstrap/Container';
 import NavBar from './components/NavBar';
@@ -29,14 +28,15 @@ import ContactMessage from "./pages/contact/ContactMessage";
 import ContactPage from "./pages/contact/ContactPage";
 import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
 import { HelmetProvider } from "react-helmet-async";
+import btnStyles from "./styles/Button.module.css";
 
 function App() {
   const location = useLocation();
   const path = location.pathname;
+
   const [cookieConsent, setCookieConsent] = useState(getCookieConsentValue("cookieConsent"));
   const [showCookieBanner, setShowCookieBanner] = useState("byCookieValue");
-  const [setNonEssentialConsent] = useState(getCookieConsentValue("nonEssentialCookies") === "true");
-
+  const [nonEssentialConsent, setNonEssentialConsent] = useState(getCookieConsentValue("nonEssentialCookies") === "true");
 
   if (cookieConsent === "false") {
     setCookieConsent(false);
@@ -103,9 +103,7 @@ function App() {
             />
             <Route exact path="/notfound" render={() => <NotFound />} />
             <Route render={() => <NotFound />} />
-
           </Switch>
-
         </Container>
         {path === "/capsules" || path === "/capsules/create" ? null : <Footer />}
         <Container />
@@ -127,20 +125,20 @@ function App() {
               document.cookie = "nonEssentialCookies=false; path=/; max-age=31536000";
             }}
             cookieName="nonEssentialCookies"
-            containerClasses="d-flex justify-content-center align-items-center"
-            contentClasses={`${styles.CookieBannerContent} m-0 ps-1 pt-1`}
+            containerClasses={`${styles.CookieBannerContainer} d-flex justify-content-center align-items-center`}
+            contentClasses={`${styles.CookieBannerContent} m-0 p-2`}
             buttonWrapperClasses={`${styles.CookieBannerButtonWrapper} m-0`}
-            buttonClasses="m-0 me-1"
-
+            buttonClasses={`${btnStyles.Button} ${btnStyles.CookieAcceptBtn} shadow rounded`}
+            declineButtonClasses={`${btnStyles.Button} ${btnStyles.CookieDeclineBtn} shadow rounded`}
           >
-            This website uses cookies to enhance your browsing experience, provide personalized content, and analyze our traffic. We also use cookies from third-party services like Google Maps to display interactive maps. By clicking "Accept All Cookies", you consent to our use of all cookies. If you choose to "Decline Non-Essential Cookies", Google Maps and other third-party services will be disabled, but essential cookies for the proper functioning of the site will still be set. <a href="/privacyPolicy" style={{ color: '#fefefe', textDecoration: 'underline' }}>Learn more</a>.
+            This website uses cookies to enhance your browsing experience, provide personalized content, and analyze our traffic. We also use cookies from third-party services like Google Places and Gemini. By clicking "Accept All Cookies," you consent to our use of all cookies. If you choose to "Decline Non-Essential Cookies," non-essential third-party services will be disabled, but essential cookies, including those for Google Places and Gemini, necessary for the proper functioning of the site, will still be set. <a href="/privacyPolicy" style={{ textDecoration: 'underline' }}>Learn more</a>.
           </CookieConsent>
-          <div className={styles.CookieReset}><i onClick={() => {
-            setShowCookieBanner("show");
-          }} className="fa-solid fa-link"></i>
+          <div className={styles.CookieReset}>
+            <i onClick={() => {
+              setShowCookieBanner("show");
+            }} className="fa-solid fa-cookie-bite"></i>
           </div>
         </>
-
       </div>
     </HelmetProvider>
   );
